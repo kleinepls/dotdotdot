@@ -10,4 +10,6 @@ return {
       vim.cmd.colorscheme "rose-pine"
     end
   },
+
+  { 'echasnovski/mini.icons', version = false, opts = {} },
 }
