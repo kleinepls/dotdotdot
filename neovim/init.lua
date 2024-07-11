@@ -1,1 +1,1 @@
-vim.print('vim btw');
+require("init_lazy");
