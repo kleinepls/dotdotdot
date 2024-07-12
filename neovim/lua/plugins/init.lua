@@ -1,5 +1,7 @@
 return {
-  "tpope/vim-fugitive",
+  'mbbill/undotree',
+  'tpope/vim-fugitive',
+  'mrjones2014/smart-splits.nvim',
 
   { 
     "rose-pine/neovim",
@@ -11,5 +13,18 @@ return {
     end
   },
 
-  { 'echasnovski/mini.icons', version = false, opts = {} },
+  {
+    'echasnovski/mini.icons',
+    version = false,
+    opts = {},
+    specs = {
+      { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
+    },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
 }
