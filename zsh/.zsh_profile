@@ -9,7 +9,7 @@ alias kill4000="lsof -ti:4000 | xargs kill"
 
 
 # vim
-alias vi="nvim"
+alias v="nvim"
 alias lsp="nvim ~/.config/nvim/lua/plugins/lsp.lua"
 alias alc="nvim $HOME/.config/alacritty/alacritty.toml"
 alias wez="nvim $HOME/.wezterm.lua"
