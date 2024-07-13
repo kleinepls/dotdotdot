@@ -19,10 +19,8 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = false })
 -- yanking, deleting
 vim.keymap.set('x', '<leader>p', '"_dP')
 vim.keymap.set('n', '<leader>Y', '"+Y')
-vim.keymap.set('n', '<leader>y', '"+y')
-vim.keymap.set('v', '<leader>y', '"+y')
-vim.keymap.set('n', '<leader>d', '"_d')
-vim.keymap.set('v', '<leader>d', '"_d')
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y')
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d')
 vim.keymap.set('v', '<leader>c', '"_c')
 
 -- tabs
@@ -59,3 +57,7 @@ vim.keymap.set('n', '<leader>ls', ':s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 -- word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- go remaps
+vim.keymap.set('n', '<leader>er', 'oif err != nil {<Enter>}<Esc>O')
+vim.keymap.set('n', '<leader>ej', '_yiw~$a `json:"<Esc>pa"`<Esc>V=')
