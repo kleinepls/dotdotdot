@@ -1,6 +1,7 @@
 return {
   "mbbill/undotree",
   "tpope/vim-fugitive",
+  "tpope/vim-sleuth",
 
   {
     "rose-pine/neovim",
