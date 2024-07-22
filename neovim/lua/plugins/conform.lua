@@ -4,11 +4,11 @@ return {
     require("conform").setup {
       formatters_by_ft = {
         lua = { "stylua" },
-        javascript = { { "prettierd", "prettier" } },
-        typescript = { { "prettierd", "prettier" } },
-        javascriptreact = { { "prettierd", "prettier" } },
-        typescriptreact = { { "prettierd", "prettier" } },
-        vue = { { "prettierd", "prettier" } },
+        javascript = { "prettierd", "prettier" },
+        typescript = { "prettierd", "prettier" },
+        javascriptreact = { "prettierd", "prettier" },
+        typescriptreact = { "prettierd", "prettier" },
+        vue = { "prettierd", "prettier" },
       },
     }
 
@@ -18,6 +18,7 @@ return {
         require("conform").format {
           bufnr = args.buf,
           lsp_format = "fallback",
+          stop_after_first = true,
         }
       end,
     })
