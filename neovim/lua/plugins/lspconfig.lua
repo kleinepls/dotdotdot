@@ -31,6 +31,7 @@ return {
       "gopls",
       "lua_ls",
       "rust_analyzer",
+      "tsserver",
       "volar",
     }
 
@@ -47,6 +48,7 @@ return {
 
       ["lua_ls"] = function()
         lspconfig.lua_ls.setup {
+          on_attach = on_attach,
           settings = {
             Lua = {
               completion = {
@@ -54,6 +56,36 @@ return {
                 callSnippet = "Both",
               },
               diagnostics = { disable = { "missing-fields" } },
+            },
+          },
+        }
+      end,
+
+      ["tsserver"] = function()
+        local mason_registry = require "mason-registry"
+        local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+          .. "/node_modules/@vue/language-server"
+
+        lspconfig.tsserver.setup {
+          on_attach = on_attach,
+          init_options = {
+            plugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = vue_language_server_path,
+                languages = { "vue" },
+              },
+            },
+          },
+        }
+      end,
+
+      ["volar"] = function()
+        lspconfig.volar.setup {
+          on_attach = on_attach,
+          init_options = {
+            vue = {
+              hybridMode = false,
             },
           },
         }
