@@ -27,22 +27,21 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-    local servers = {
-      "gopls",
-      "lua_ls",
-      "rust_analyzer",
-      "tsserver",
-      "volar",
+    require("mason-tool-installer").setup {
+      ensure_installed = {
+        "gopls",
+        "lua_ls",
+        "rust_analyzer",
+        "tsserver",
+        "volar",
+      },
     }
-
-    require("mason-tool-installer").setup { ensure_installed = servers }
 
     require("mason-lspconfig").setup_handlers {
       function(server_name)
         lspconfig[server_name].setup {
           capabilities = capabilities,
           on_attach = on_attach,
-          settings = servers[server_name],
         }
       end,
 
