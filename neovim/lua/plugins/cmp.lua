@@ -2,6 +2,7 @@ return {
   "hrsh7th/nvim-cmp",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-calc",
     "onsails/lspkind.nvim",
   },
 
@@ -20,6 +21,9 @@ return {
 
           ellipsis_char = "...",
           show_labelDetails = true,
+
+          before = require("nvim-highlight-colors").format,
+          -- before = require("tailwind-tools.cmp").lspkind_format,
         },
       },
 
@@ -41,6 +45,7 @@ return {
       sources = {
         { name = "nvim_lsp" },
         { name = "buffer" },
+        { name = "calc" },
       },
     }
   end,
