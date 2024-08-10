@@ -3,10 +3,10 @@ return {
   config = function()
     require("lint").linters_by_ft = {
       css = { "stylint" },
-      json = { "jsonlint" },
       javascript = { "eslint_d" },
-      typescript = { "eslint_d" },
       javascriptreact = { "eslint_d" },
+      json = { "jsonlint" },
+      typescript = { "eslint_d" },
       typescriptreact = { "eslint_d" },
       vue = { "eslint_d" },
     }

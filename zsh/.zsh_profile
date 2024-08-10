@@ -14,7 +14,7 @@ alias lsp="nvim ~/.config/nvim/lua/plugins/lsp.lua"
 alias alc="nvim $HOME/.config/alacritty/alacritty.toml"
 alias wez="nvim $HOME/.wezterm.lua"
 alias tmuc="nvim $HOME/.tmux.conf"
-alias vimc="cd ~/.config/nvim && nvim ."
+alias vimc="cd ~/dotfiles/neovim && nvim ."
 alias obsi="cd $HOME/Documents/Obsidian\ Vault && nvim ."
 
 
@@ -46,13 +46,3 @@ alias pamo="php artisan make:model"
 alias pamc="php artisan make:controller"
 alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 alias puf="sail phpunit --filter"
-
-
-# Paths
-export GOPATH="$HOME/.local/go"
-export PATH="$GOPATH/bin:$PATH"
-export LSP="$HOME/.config/nvim/lua/plugins/lsp.lua"
-export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-export PATH="$HOME/.scripts:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
