@@ -1,5 +1,4 @@
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
 vim.keymap.set("n", "K", require("pretty_hover").hover)
 
@@ -38,6 +37,21 @@ vim.keymap.set("n", "<leader>ls", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 -- word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- git
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "<leader>gd", "<cmd>Gvdiffsplit<cr>")
+
+-- javascript
+vim.keymap.set("n", "<leader>cl", "oconsole.log()<Esc>i")
+
+-- vue
+vim.keymap.set("n", "<leader>vs", 'i<script setup lang="ts"><CR><CR></script><CR><CR><template><CR></template><Esc>O')
+vim.keymap.set(
+  "n",
+  "<leader>vc",
+  'i<template><CR></template><CR><CR><script lang="ts"><CR></script><Esc>Osetup(props, { emit }) {<CR>}<Esc>O'
+)
 
 -- go
 vim.keymap.set("n", "<leader>er", "oif err != nil {<Enter>}<Esc>O")
