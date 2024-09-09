@@ -32,7 +32,7 @@ return {
         "gopls",
         "lua_ls",
         "rust_analyzer",
-        "tsserver",
+        "ts_ls",
         "volar",
       },
     }
@@ -61,7 +61,7 @@ return {
       end,
 
       -- reference: https://github.com/williamboman/mason-lspconfig.nvim/issues/371#issuecomment-2188015156
-      ["tsserver"] = function()
+      ["ts_ls"] = function()
         local mason_registry = require "mason-registry"
         local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
             .. "/node_modules/@vue/language-server"
