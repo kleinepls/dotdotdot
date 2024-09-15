@@ -33,4 +33,17 @@ return {
       }
     end,
   },
+
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {
+      bind = true,
+      hint_enable = false, -- https://github.com/ray-x/lsp_signature.nvim/issues/319
+      hint_prefix = "",
+      hi_parameter = "IncSearch",
+      toggle_key = "<C-k>",
+      -- select_signature_key = "<C-n>",
+    },
+  },
 }
