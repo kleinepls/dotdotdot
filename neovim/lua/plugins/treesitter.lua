@@ -1,24 +1,24 @@
 return {
-  { 'windwp/nvim-ts-autotag', lazy = false, opts = {} },
+  { "windwp/nvim-ts-autotag", lazy = false, opts = {} },
 
   {
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', },
-    build = ':TSUpdate',
+    "nvim-treesitter/nvim-treesitter",
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    build = ":TSUpdate",
     config = function()
-      require 'nvim-treesitter.configs'.setup {
+      require("nvim-treesitter.configs").setup {
         ensure_installed = {
-          'css',
-          'go',
-          'html',
-          'javascript',
-          'lua',
-          'rust',
-          'tsx',
-          'typescript',
-          'vimdoc',
-          'vim',
-          'vue',
+          "css",
+          "go",
+          "html",
+          "javascript",
+          "lua",
+          "rust",
+          "tsx",
+          "typescript",
+          "vimdoc",
+          "vim",
+          "vue",
         },
         auto_install = true,
 
@@ -31,9 +31,9 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = '<C-space>',
-            node_incremental = '<C-space>',
-            node_decremental = '<C-Z>',
+            init_selection = "<C-space>",
+            node_incremental = "<C-space>",
+            node_decremental = "<C-Z>",
           },
         },
 
@@ -46,18 +46,18 @@ return {
             swap_previous = {
               ["<leader>Z"] = "@parameter.inner",
             },
-          }
-        }
+          },
+        },
       }
     end,
   },
 
   {
-    'nvim-treesitter/nvim-treesitter-context',
+    "nvim-treesitter/nvim-treesitter-context",
     config = function()
-      local ctx = require 'treesitter-context'
+      local ctx = require "treesitter-context"
       ctx.setup { max_lines = 3 }
-      vim.keymap.set('n', '[c', ctx.go_to_context, { silent = true })
-    end
+      vim.keymap.set("n", "[c", ctx.go_to_context, { silent = true })
+    end,
   },
 }
