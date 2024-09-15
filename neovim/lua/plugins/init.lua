@@ -4,40 +4,6 @@ return {
   "tpope/vim-sleuth",
 
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme "rose-pine"
-    end,
-  },
-
-  {
-    "brenoprata10/nvim-highlight-colors",
-    opts = {
-      render = "virtual",
-    },
-  },
-
-  { "dmmulroy/tsc.nvim", opts = {} },
-
-  -- {
-  --   "luckasRanarison/tailwind-tools.nvim",
-  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  --   opts = {},
-  --   init = function()
-  --     vim.keymap.set("n", "<leader>ts", vim.cmd.TailwindSort)
-  --   end,
-  -- },
-
-  {
-    "Fildo7525/pretty_hover",
-    event = "LspAttach",
-    opts = {},
-  },
-
-  {
     "echasnovski/mini.icons",
     version = false,
     opts = {},

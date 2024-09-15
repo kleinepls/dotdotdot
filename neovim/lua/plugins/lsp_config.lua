@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    { "folke/lazydev.nvim",      ft = "lua", opts = {} },
+    { "folke/lazydev.nvim", ft = "lua", opts = {} },
     { "williamboman/mason.nvim", opts = {} },
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -32,6 +32,8 @@ return {
         "gopls",
         "lua_ls",
         "rust_analyzer",
+        "stylua",
+        "tailwindcss",
         "ts_ls",
         "volar",
       },
@@ -64,7 +66,7 @@ return {
       ["ts_ls"] = function()
         local mason_registry = require "mason-registry"
         local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-            .. "/node_modules/@vue/language-server"
+          .. "/node_modules/@vue/language-server"
 
         lspconfig.ts_ls.setup {
           on_attach = on_attach,

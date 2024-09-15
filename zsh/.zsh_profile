@@ -1,6 +1,7 @@
 
 bindkey -s ^f "tmux-sessionizer\n"
 alias xbox="upower -e | grep gaming_input | xargs upower -i"
+alias copy="xclip -selection | clipboard"
 
 alias o="open ."
 alias zshc="nvim ~/.zshrc"
