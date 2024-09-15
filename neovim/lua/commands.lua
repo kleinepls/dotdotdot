@@ -1,6 +1,11 @@
 vim.keymap.set("n", "<leader>cp", vim.cmd.CopyPath)
 vim.keymap.set("n", "<leader>cf", vim.cmd.CopyPathFull)
 vim.keymap.set("n", "<leader>cn", vim.cmd.CopyFileName)
+vim.keymap.set("n", "<leader>tw", vim.cmd.ToggleWordWrap)
+
+vim.keymap.set("n", "<leader>tn", function()
+  vim.opt.number = not vim.api.nvim_get_option_value("number", {})
+end)
 
 vim.api.nvim_create_user_command("CopyPath", function()
   local path = vim.fn.expand "%"
