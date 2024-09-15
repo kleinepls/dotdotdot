@@ -1,21 +1,25 @@
 return {
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
     dependencies = { "echasnovski/mini.icons" },
     config = function()
-      local oil = require 'oil'
+      local oil = require "oil"
 
       oil.setup {
-        columns = { 'icon' },
+        columns = { "icon" },
         skip_confirm_for_simple_edits = true,
 
+        view_options = {
+          show_hidden = true,
+        },
+
         keymaps = {
-          ['<C-s>'] = false,
-          ['<C-e>'] = 'actions.select_split',
-          ['<C-h>'] = false,
-          ['<C-p>'] = false,
-          ['<C-t>'] = 'actions.preview',
-          ['.'] = 'actions.toggle_hidden',
+          ["<C-s>"] = false,
+          ["<C-e>"] = "actions.select_split",
+          ["<C-h>"] = false,
+          ["<C-p>"] = false,
+          ["<C-t>"] = "actions.preview",
+          ["."] = "actions.toggle_hidden",
         },
 
         float = {
