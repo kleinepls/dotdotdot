@@ -16,16 +16,22 @@ return {
 
     cmp.setup {
       window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered {
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:Visual",
+        },
+        documentation = cmp.config.window.bordered {
+          winhighlight = "FloatBorder:Pmenu",
+          max_width = 10,
+        },
       },
       formatting = {
         format = function(entry, item)
           local color_item = hl_colors.format(entry, { kind = item.kind })
+          local maxwidth = 20
 
           item = lspkind.cmp_format {
             mode = "symbol_text",
-            maxwidth = 30,
+            maxwidth = maxwidth,
             ellipsis_char = "...",
             show_labelDetails = true,
             menu = {
@@ -38,8 +44,12 @@ return {
             },
           }(entry, item)
 
-          item.kind_hl_group = color_item.abbr_hl_group
+          -- keep the completion menu width fixed
+          if #item.abbr < maxwidth then
+            item.abbr = item.abbr .. (" "):rep(maxwidth - #item.abbr)
+          end
 
+          item.kind_hl_group = color_item.abbr_hl_group
           return item
         end,
       },

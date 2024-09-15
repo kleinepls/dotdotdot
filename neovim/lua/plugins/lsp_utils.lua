@@ -5,6 +5,11 @@ return {
   {
     "Fildo7525/pretty_hover",
     event = "LspAttach",
-    opts = {},
+    opts = {
+      max_width = 80,
+    },
+    init = function()
+      vim.keymap.set("n", "K", require("pretty_hover").hover)
+    end,
   },
 }

@@ -43,7 +43,6 @@ vim.keymap.set("n", "<leader>ls", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 vim.keymap.set("n", "<leader>gd", vim.cmd.Gvdiffsplit)
-vim.keymap.set("n", "K", require("pretty_hover").hover)
 
 -- tmux-sessionizer
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
