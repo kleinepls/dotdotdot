@@ -16,13 +16,4 @@ return {
       virtual_symbol_suffix = "",
     },
   },
-
-  -- {
-  --   "luckasRanarison/tailwind-tools.nvim",
-  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  --   opts = {},
-  --   init = function()
-  --     vim.keymap.set("n", "<leader>ts", vim.cmd.TailwindSort)
-  --   end,
-  -- },
 }
