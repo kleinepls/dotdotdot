@@ -10,21 +10,38 @@ return {
     vim.opt.shortmess:append "c"
     vim.opt.completeopt = "menuone,noselect,preview"
 
+    local hl_colors = require "nvim-highlight-colors"
     local lspkind = require "lspkind"
     local cmp = require "cmp"
 
     cmp.setup {
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
       formatting = {
-        format = lspkind.cmp_format {
-          mode = "symbol_text",
-          -- maxwidth = 50,
+        format = function(entry, item)
+          local color_item = hl_colors.format(entry, { kind = item.kind })
 
-          ellipsis_char = "...",
-          show_labelDetails = true,
+          item = lspkind.cmp_format {
+            mode = "symbol_text",
+            maxwidth = 30,
+            ellipsis_char = "...",
+            show_labelDetails = true,
+            menu = {
+              buffer = "[Buffer]",
+              calc = "[Calc]",
+              luasnip = "[LuaSnip]",
+              nvim_lsp = "[LSP]",
+              nvim_lua = "[Lua]",
+              path = "[Path]",
+            },
+          }(entry, item)
 
-          before = require("nvim-highlight-colors").format,
-          -- before = require("tailwind-tools.cmp").lspkind_format,
-        },
+          item.kind_hl_group = color_item.abbr_hl_group
+
+          return item
+        end,
       },
 
       mapping = {
@@ -43,9 +60,9 @@ return {
       },
 
       sources = {
-        { name = "nvim_lsp" },
-        { name = "buffer" },
-        { name = "calc" },
+        { name = "nvim_lsp", group_index = 1 },
+        { name = "calc", group_index = 2 },
+        { name = "buffer", group_index = 3 },
       },
     }
   end,
