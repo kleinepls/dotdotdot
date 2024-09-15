@@ -25,6 +25,7 @@ vim.keymap.set("n", "TP", vim.cmd.tabprevious)
 vim.keymap.set("n", "TX", vim.cmd.tabclose)
 
 vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float)
+vim.diagnostic.config { float = { border = "rounded" } }
 
 -- yanking, deleting
 vim.keymap.set("x", "<leader>p", '"_dP')
@@ -32,8 +33,9 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 -- vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
-vim.keymap.set("n", "<leader>fs", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
-vim.keymap.set("n", "<leader>ls", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>rl", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>")
 
 --
 --
