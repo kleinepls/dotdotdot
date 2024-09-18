@@ -7,22 +7,30 @@ vim.keymap.set("n", "<leader>tn", function()
   vim.opt.number = not vim.api.nvim_get_option_value("number", {})
 end)
 
+local function cleanup_path(path)
+  return string.gsub(path, "oil://", "")
+end
+
 vim.api.nvim_create_user_command("CopyPath", function()
-  local path = vim.fn.expand "%"
+  local path = cleanup_path(vim.fn.expand "%")
   vim.fn.setreg("+", path)
   vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
 
 vim.api.nvim_create_user_command("CopyPathFull", function()
-  local path = vim.fn.expand "%:p"
+  local path = cleanup_path(vim.fn.expand "%:p")
   vim.fn.setreg("+", path)
   vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
 
 vim.api.nvim_create_user_command("CopyFileName", function()
   local file = vim.fn.expand "%:t"
-  vim.fn.setreg("+", file)
-  vim.notify('Copied "' .. file .. '" to the clipboard!')
+  if file ~= "" then
+    vim.fn.setreg("+", file)
+    vim.notify('Copied "' .. file .. '" to the clipboard!')
+  else
+    vim.notify "No file opened"
+  end
 end, {})
 
 vim.api.nvim_create_user_command("ToggleWordWrap", function()

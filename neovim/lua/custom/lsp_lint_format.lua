@@ -13,7 +13,7 @@ return {
         },
       }
 
-      vim.keymap.set("n", "<leader>fr", function()
+      vim.keymap.set("n", "<leader>ft", function()
         require("conform").format {
           bufnr = 0,
           lsp_format = "fallback",

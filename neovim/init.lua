@@ -1,5 +1,5 @@
+require "lazy_init"
 require "opts"
-require "init_lazy"
 require "keymaps"
 require "commands"
 
