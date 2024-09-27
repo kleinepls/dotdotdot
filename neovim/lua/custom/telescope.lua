@@ -14,6 +14,10 @@ return {
     local themes = require "telescope.themes"
 
     telescope.setup {
+      defaults = {
+        path_display = { "truncate" },
+      },
+
       extensions = {
         ["ui-select"] = {
           require("telescope.themes").get_dropdown(),

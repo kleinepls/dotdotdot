@@ -1,3 +1,13 @@
+vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float)
+
+vim.diagnostic.config {
+  signs = false,
+  float = {
+    border = "rounded",
+    source = true,
+  },
+}
+
 return {
   { "dmmulroy/tsc.nvim", opts = {} },
   { "j-hui/fidget.nvim", opts = {} },
