@@ -9,8 +9,7 @@ vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.isfname:append "@-@"
 vim.opt.mouse = "a"
--- vim.opt.nu = true
--- vim.opt.rnu = true
+vim.opt.nu = true
 vim.opt.scrolloff = 8
 vim.opt.shiftwidth = 4
 vim.opt.signcolumn = "auto"
