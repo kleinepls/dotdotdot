@@ -3,6 +3,7 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-calc",
+    "hrsh7th/cmp-nvim-lsp-signature-help",
     "onsails/lspkind.nvim",
   },
 
@@ -16,14 +17,11 @@ return {
 
     cmp.setup {
       window = {
-        completion = cmp.config.window.bordered {
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:Visual",
-        },
-        documentation = cmp.config.window.bordered {
-          winhighlight = "FloatBorder:Pmenu",
-          max_width = 10,
+        documentation = {
+          max_width = 50,
         },
       },
+
       formatting = {
         format = function(entry, item)
           local color_item = hl_colors.format(entry, { kind = item.kind })
@@ -70,6 +68,7 @@ return {
       },
 
       sources = {
+        { name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp", group_index = 1 },
         { name = "calc", group_index = 2 },
         { name = "buffer", group_index = 3 },
