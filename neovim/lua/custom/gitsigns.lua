@@ -12,6 +12,9 @@ return {
         untracked = { text = "┆" },
       },
 
+      signcolumn = false,
+      numhl = true,
+
       attach_to_untracked = true,
 
       current_line_blame = false,
