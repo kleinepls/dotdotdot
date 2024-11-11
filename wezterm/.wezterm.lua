@@ -15,7 +15,7 @@ local config = {
 	debug_key_events = true,
 	use_ime = false,
 
-	font_size = 17,
+	font_size = 18,
 	line_height = 1.3,
 
 	keys = {

@@ -4,7 +4,17 @@ return {
     name = "rose-pine",
     lazy = false,
     priority = 1000,
-    config = function()
+    opts = {
+      styles = {
+        -- transparency = true,
+      },
+      palette = {
+        main = {
+          base = "#000000",
+        },
+      },
+    },
+    init = function()
       vim.cmd.colorscheme "rose-pine"
     end,
   },
