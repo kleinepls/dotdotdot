@@ -18,6 +18,16 @@ return {
         path_display = { "truncate" },
       },
 
+      pickers = {
+        grep_string = { initial_mode = "normal" },
+        resume = { initial_mode = "normal" },
+        quickfix = { initial_mode = "normal" },
+        oldfiles = { initial_mode = "normal" },
+        lsp_references = { initial_mode = "normal" },
+        lsp_definitions = { initial_mode = "normal" },
+        lsp_implementations = { initial_mode = "normal" },
+      },
+
       extensions = {
         ["ui-select"] = {
           require("telescope.themes").get_dropdown(),
@@ -28,9 +38,8 @@ return {
     telescope.load_extension "fzf"
     telescope.load_extension "ui-select"
 
-    vim.keymap.set("n", "<leader>fp", builtin.git_files)
-    vim.keymap.set("n", "<leader>ff", builtin.find_files)
-    vim.keymap.set("n", "<leader>fg", builtin.live_grep)
+    vim.keymap.set("n", "<leader>ff", builtin.git_files)
+    vim.keymap.set("n", "<leader>fp", builtin.find_files)
     vim.keymap.set("n", "<leader>fh", builtin.help_tags)
     vim.keymap.set("n", "<leader>fc", builtin.commands)
     vim.keymap.set("n", "<leader>fs", builtin.builtin)
@@ -40,9 +49,17 @@ return {
     vim.keymap.set("n", "<leader>fk", builtin.keymaps)
     vim.keymap.set("n", "<leader>fq", builtin.quickfix)
 
+    vim.keymap.set("n", "<leader>fG", builtin.live_grep)
     vim.keymap.set("n", "<leader>fw", function()
+      local input = vim.fn.input "Grep > "
+      if input ~= "" then
+        builtin.grep_string { search = input, prompt_title = input }
+      end
+    end)
+
+    vim.keymap.set("n", "<leader>fg", function()
       local word = vim.fn.expand "<cword>"
-      builtin.grep_string { search = word, prompt_title = "word: " .. word }
+      builtin.grep_string { search = word, prompt_title = word }
     end)
 
     vim.keymap.set("n", "<leader>af", function()
