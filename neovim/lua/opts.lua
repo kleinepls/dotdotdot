@@ -3,11 +3,12 @@ vim.opt.backup = false
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.expandtab = true
--- vim.opt.guicursor = 'n-v-c:block,i-v:blinkon400'
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.isfname:append "@-@"
+vim.opt.list = true
+vim.opt.listchars = { multispace = "⋅", trail = "⋅", tab = "⋅⋅" }
 vim.opt.mouse = "a"
 vim.opt.nu = true
 vim.opt.scrolloff = 8

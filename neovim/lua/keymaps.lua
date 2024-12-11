@@ -30,7 +30,7 @@ vim.keymap.set("n", "TX", vim.cmd.tabclose)
 vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
--- vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
 vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>rl", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
@@ -38,12 +38,7 @@ vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>")
 
 --
 --
--- plugins
 --
---
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-vim.keymap.set("n", "<leader>gd", vim.cmd.Gvdiffsplit)
 
 -- tmux-sessionizer
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")

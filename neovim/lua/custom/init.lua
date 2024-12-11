@@ -1,20 +1,10 @@
 return {
-  "mbbill/undotree",
-  "tpope/vim-fugitive",
   "tpope/vim-sleuth",
 
   {
-    "echasnovski/mini.icons",
-    version = false,
-    opts = {},
-    specs = {
-      { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
-    },
+    "mbbill/undotree",
     init = function()
-      package.preload["nvim-web-devicons"] = function()
-        require("mini.icons").mock_nvim_web_devicons()
-        return package.loaded["nvim-web-devicons"]
-      end
+      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
     end,
   },
 

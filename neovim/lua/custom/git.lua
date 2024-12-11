@@ -1,4 +1,12 @@
-return {
+local fugitive = {
+  "tpope/vim-fugitive",
+  init = function()
+    vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr><cmd>wincmd H<cr>")
+    vim.keymap.set("n", "<leader>gd", vim.cmd.Gvdiffsplit)
+  end,
+}
+
+local gitsigns = {
   "lewis6991/gitsigns.nvim",
 
   config = function()
@@ -57,4 +65,9 @@ return {
       end,
     }
   end,
+}
+
+return {
+  fugitive,
+  gitsigns,
 }
