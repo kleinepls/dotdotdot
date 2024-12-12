@@ -16,8 +16,8 @@ return {
       },
 
       highlight_groups = {
-        StatusLine = { bg = "#191919" },
-        StatusLineNC = { bg = "#191919" },
+        StatusLine = { bg = "#000000" },
+        StatusLineNC = { bg = "#000000" },
         WinBar = { bg = "#000000" },
         WinBarNC = { bg = "#000000" },
       },

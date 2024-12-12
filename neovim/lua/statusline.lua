@@ -17,6 +17,9 @@ local branch = ""
 function Statusline()
   local head = vim.b.gitsigns_head
   if head then
+    if head:len() > 40 then
+      head = head:sub(0, 20) .. "..." .. head:sub(head:len() - 20)
+    end
     branch = string.format(" %s", head)
   end
 

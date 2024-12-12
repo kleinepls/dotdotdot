@@ -7,16 +7,14 @@ vim.keymap.set("v", "<space>", "<nop>")
 
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = false })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = false })
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
--- vim.keymap.set("n", "<C-j>", "5j")
--- vim.keymap.set("n", "<C-k>", "5k")
+vim.keymap.set("n", "<M-j>", "5j")
+vim.keymap.set("n", "<M-k>", "5k")
+vim.keymap.set("v", "<M-j>", "5j")
+vim.keymap.set("v", "<M-k>", "5k")
+
 -- word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
-vim.keymap.set("n", "<M-j>", "5j")
-vim.keymap.set("n", "<M-k>", "5k")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -65,7 +63,7 @@ vim.keymap.set("n", "<leader>co", function()
   local ft = vim.bo.filetype
   local word = vim.fn.expand "<cword>"
 
-  if ft == "javascript" or ft == "typescript" then
+  if ft == "javascript" or ft == "typescript" or ft == "vue" or ft == "typesriptreact" then
     if word == "" then
       vim.cmd "normal oconsole.log()"
       vim.cmd "startinsert"

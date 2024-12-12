@@ -49,16 +49,20 @@ return {
     vim.keymap.set("n", "<leader>fk", builtin.keymaps)
     vim.keymap.set("n", "<leader>fq", builtin.quickfix)
 
-    vim.keymap.set("n", "<leader>fG", builtin.live_grep)
-    vim.keymap.set("n", "<leader>fw", function()
+    vim.keymap.set("n", "<leader>G", builtin.live_grep)
+    vim.keymap.set("n", "<leader>fg", function()
       local input = vim.fn.input "Grep > "
       if input ~= "" then
         builtin.grep_string { search = input, prompt_title = input }
       end
     end)
 
-    vim.keymap.set("n", "<leader>fg", function()
+    vim.keymap.set("n", "<leader>fw", function()
       local word = vim.fn.expand "<cword>"
+      if word == "" then
+        builtin.live_grep()
+        return
+      end
       builtin.grep_string { search = word, prompt_title = word }
     end)
 
@@ -75,7 +79,7 @@ return {
 
     -- misc
     vim.keymap.set("n", "<leader>fn", function()
-      builtin.find_files { cwd = "~/dotfiles/neovim", prompt_title = "~/dotfiles/neovim" }
+      builtin.find_files { cwd = "~/dotfiles", prompt_title = "~/dotfiles" }
     end)
 
     -- git
