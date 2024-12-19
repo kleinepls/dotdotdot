@@ -1,41 +1,57 @@
 vim.keymap.set("n", "<leader>x", "<cmd>source %<cr>")
 
-vim.api.nvim_set_hl(0, "WinbarFileName", { fg = "#ffffff" })
-
-vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
-  callback = function()
-    local dir = vim.fn.expand "%:h"
-    local file = vim.fn.expand "%:t"
-    vim.opt.winbar = dir .. "/" .. "%#WinbarFileName#" .. file .. "%*" .. " %m"
-  end,
-})
-
 --- storing branch as a local variable so that it wouldn't momentarily disappear from statusline when changing buffers
 local branch = ""
 
---- @return string
-function Statusline()
-  local head = vim.b.gitsigns_head
-  if head then
-    if head:len() > 40 then
-      head = head:sub(0, 20) .. "..." .. head:sub(head:len() - 20)
-    end
-    branch = string.format(" %s", head)
+--- @param filename string
+local function git_branch(filename)
+  local head = vim.b.gitsigns_head or ""
+  if head == "" then
+    return
   end
 
+  local prefix = "  "
+  local win_width = vim.api.nvim_win_get_width(0)
+  local remaining_width = win_width / 2 - filename:len() / 2
+
+  if prefix:len() + head:len() > remaining_width then
+    branch = prefix .. head:sub(0, remaining_width - prefix:len() - 5) .. "..."
+  else
+    branch = prefix .. head
+  end
+end
+
+--- @param filename string
+--- @return string
+local function branch_padding(filename)
+  local win_width = vim.api.nvim_win_get_width(0)
+  local remaining_width = win_width / 2 - filename:len() / 2 - branch:len()
+  return (" "):rep(remaining_width)
+end
+
+--- @param filename string
+--- @return string
+local function statusline(filename)
+  git_branch(filename)
+
   return table.concat {
-    " ",
     branch,
+    branch_padding(filename),
+    filename,
+    " %m",
     "%=",
-    "[%l|%L:%c]",
-    " ",
+    " [%l|%L:%c] ",
   }
 end
 
-vim.o.statusline = "%!v:lua.Statusline()"
-
 vim.api.nvim_create_autocmd({ "LspProgress", "WinEnter", "BufEnter" }, {
   callback = function()
-    vim.cmd.redrawstatus()
+    vim.wo.statusline = statusline(vim.fn.bufname(vim.fn.bufnr()))
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+  callback = function()
+    vim.wo.statusline = statusline(vim.fn.bufname(vim.fn.bufnr()))
   end,
 })
