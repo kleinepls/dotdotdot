@@ -2,7 +2,11 @@ local fugitive = {
   "tpope/vim-fugitive",
   init = function()
     vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr><cmd>wincmd H<cr>")
-    vim.keymap.set("n", "<leader>gd", vim.cmd.Gvdiffsplit)
+    vim.keymap.set("n", "<leader>gv", vim.cmd.Gvdiffsplit)
+    vim.keymap.set("n", "<leader>gd", function()
+      local branch = vim.fn.input "Branch > "
+      vim.cmd("Gvdiffsplit " .. branch)
+    end)
   end,
 }
 
