@@ -1,12 +1,14 @@
 return {
   {
     "echasnovski/mini.ai",
+    version = false,
     opts = function()
       local ai = require "mini.ai"
       return {
         custom_textobjects = {
           f = ai.gen_spec.treesitter { a = "@function.outer", i = "@function.inner" },
         },
+        search_method = "cover_or_nearest",
       }
     end,
   },
@@ -25,4 +27,7 @@ return {
       end
     end,
   },
+
+  { "echasnovski/mini.splitjoin", version = false, opts = {} },
+  { "echasnovski/mini.surround", version = false, opts = {} },
 }

@@ -38,8 +38,7 @@ local function statusline(filename)
     branch,
     branch_padding(filename),
     filename,
-    " %m",
-    "%=",
+    "%m%=",
     " [%l|%L:%c] ",
   }
 end
