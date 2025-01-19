@@ -8,28 +8,23 @@ return {
   },
   config = function()
     local lspconfig = require "lspconfig"
+    local telescope = require "telescope.builtin"
 
-    local on_attach = function()
-      local telescope = require "telescope.builtin"
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 
-      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-
-      vim.keymap.set("n", "gd", telescope.lsp_definitions)
-      vim.keymap.set("n", "gr", telescope.lsp_references)
-      vim.keymap.set("n", "gD", telescope.lsp_type_definitions)
-      vim.keymap.set("n", "gI", telescope.lsp_implementations)
-      vim.keymap.set("n", "<leader>ds", telescope.lsp_document_symbols)
-      vim.keymap.set("n", "<leader>ws", telescope.lsp_dynamic_workspace_symbols)
-    end
-
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+    vim.keymap.set("n", "gd", telescope.lsp_definitions)
+    vim.keymap.set("n", "gr", telescope.lsp_references)
+    vim.keymap.set("n", "gD", telescope.lsp_type_definitions)
+    vim.keymap.set("n", "gI", telescope.lsp_implementations)
+    vim.keymap.set("n", "<leader>ds", telescope.lsp_document_symbols)
+    vim.keymap.set("n", "<leader>ws", telescope.lsp_dynamic_workspace_symbols)
 
     require("mason-tool-installer").setup {
       ensure_installed = {
         "gopls",
+        "html",
         "lua_ls",
         "rust_analyzer",
         "stylua",
@@ -41,15 +36,11 @@ return {
 
     require("mason-lspconfig").setup_handlers {
       function(server_name)
-        lspconfig[server_name].setup {
-          capabilities = capabilities,
-          on_attach = on_attach,
-        }
+        lspconfig[server_name].setup {}
       end,
 
       ["lua_ls"] = function()
         lspconfig.lua_ls.setup {
-          on_attach = on_attach,
           settings = {
             Lua = {
               completion = {
@@ -69,7 +60,6 @@ return {
           .. "/node_modules/@vue/language-server"
 
         lspconfig.ts_ls.setup {
-          on_attach = on_attach,
           init_options = {
             plugins = {
               {
@@ -84,7 +74,6 @@ return {
 
       ["volar"] = function()
         lspconfig.volar.setup {
-          on_attach = on_attach,
           init_options = {
             vue = {
               hybridMode = false,
