@@ -7,8 +7,6 @@ vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.isfname:append "@-@"
-vim.opt.list = true
-vim.opt.listchars = { multispace = "⋅", trail = "⋅", tab = "⋅⋅" }
 vim.opt.mouse = "a"
 vim.opt.nu = true
 vim.opt.scrolloff = 8

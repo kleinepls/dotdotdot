@@ -28,6 +28,13 @@ return {
     end,
   },
 
-  { "echasnovski/mini.splitjoin", version = false, opts = {} },
+  {
+    "echasnovski/mini.splitjoin",
+    version = false,
+    opts = {
+      mappings = { toggle = "<leader>S" },
+    },
+  },
+
   { "echasnovski/mini.surround", version = false, opts = {} },
 }

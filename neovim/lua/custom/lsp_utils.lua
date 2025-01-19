@@ -3,6 +3,7 @@ vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float)
 vim.diagnostic.config {
   signs = false,
   severity_sort = true,
+  virtual_text = true,
   float = {
     border = "rounded",
     source = true,
