@@ -4,7 +4,6 @@ return {
   version = "*",
   opts = {
     signature = { enabled = true },
-    documentation = { auto_show = true },
     appearance = { nerd_font_variant = "mono" },
 
     keymap = {
@@ -15,6 +14,8 @@ return {
     },
 
     completion = {
+      documentation = { auto_show = true },
+
       menu = {
         auto_show = function(ctx)
           return ctx.mode ~= "cmdline"
