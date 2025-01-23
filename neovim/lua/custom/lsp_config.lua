@@ -73,10 +73,17 @@ return {
       end,
 
       ["volar"] = function()
+        local mason_registry = require "mason-registry"
+        local ts_ls_path = mason_registry.get_package("vue-language-server"):get_install_path()
+          .. "/node_modules/typescript/lib/"
+
         lspconfig.volar.setup {
           init_options = {
             vue = {
               hybridMode = false,
+            },
+            typescript = {
+              tsdk = ts_ls_path,
             },
           },
         }

@@ -57,7 +57,7 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     config = function()
       local ctx = require "treesitter-context"
-      ctx.setup { max_lines = 3 }
+      ctx.setup { max_lines = 2 }
       vim.keymap.set("n", "[c", ctx.go_to_context, { silent = true })
     end,
   },
