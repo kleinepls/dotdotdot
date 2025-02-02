@@ -1,0 +1,69 @@
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = "*",
+})
+
+require "kleine.statusline"
+require "kleine.commands"
+
+vim.opt.autoindent = true
+vim.opt.wrap = false
+vim.opt.smartcase = true
+vim.opt.smartindent = true
+vim.opt.rnu = true
+
+-- tmux-sessionizer
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
+vim.keymap.set("n", "<space>", "<nop>")
+vim.keymap.set("v", "<space>", "<nop>")
+-- word wrap
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- moving lines/text in visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = false })
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = false })
+
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+vim.opt.signcolumn = "auto"
+vim.opt.expandtab = true
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.incsearch = true
+
+vim.keymap.set({ "n", "v" }, "<M-j>", "5j")
+vim.keymap.set({ "n", "v" }, "<M-k>", "5k")
+vim.keymap.set("n", "TN", vim.cmd.tabnext)
+vim.keymap.set("n", "TP", vim.cmd.tabprevious)
+vim.keymap.set("n", "TX", vim.cmd.tabclose)
+
+vim.keymap.set("x", "<leader>p", '"_dP')
+vim.keymap.set("n", "<leader>Y", '"+Y')
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+
+vim.opt.scrolloff = 8
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
+vim.opt.backup = false
+vim.opt.isfname:append "@-@"
+vim.opt.mouse = "a"
+vim.opt.swapfile = false
+vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
+vim.opt.undofile = true
+vim.opt.updatetime = 50
+
+-- text replacing, todo: make this nicer
+vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>rl", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>")
