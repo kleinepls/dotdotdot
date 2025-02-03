@@ -10,6 +10,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 require "kleine.statusline"
 require "kleine.commands"
 
+vim.diagnostic.config {
+  signs = false,
+  severity_sort = true,
+  virtual_text = true,
+  virtual_lines = false,
+  float = {
+    border = "rounded",
+    source = true,
+  },
+}
+
+vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>dg", function()
+  vim.diagnostic.config {
+    virtual_lines = not vim.diagnostic.config().virtual_lines,
+  }
+end)
+
 vim.opt.autoindent = true
 vim.opt.wrap = false
 vim.opt.smartcase = true
