@@ -7,6 +7,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
+local mel = require('melange/palettes/dark')
+vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
+vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
+
 require "kleine.statusline"
 require "kleine.commands"
 
@@ -32,6 +36,7 @@ vim.opt.autoindent = true
 vim.opt.wrap = false
 vim.opt.smartcase = true
 vim.opt.smartindent = true
+vim.opt.nu = true
 vim.opt.rnu = true
 
 -- tmux-sessionizer
@@ -49,6 +54,11 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = false })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = false })
+
+vim.opt.list = true
+vim.opt.listchars = "tab:» →,leadmultispace:† · ‡ · ,trail:▫,precedes:←,extends:◊"
+vim.opt.shortmess:append "c"
+vim.opt.completeopt = "menu,longest,preview"
 
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
