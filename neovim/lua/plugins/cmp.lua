@@ -6,9 +6,8 @@ return {
     signature = { enabled = true },
     appearance = { nerd_font_variant = "mono" },
 
-    keymap = {
-      preset = "default",
-      cmdline = {
+    cmdline = {
+      keymap = {
         ["<Tab>"] = {},
       },
     },
