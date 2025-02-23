@@ -43,8 +43,7 @@ vim.opt.rnu = true
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
-vim.keymap.set("n", "<space>", "<nop>")
-vim.keymap.set("v", "<space>", "<nop>")
+vim.keymap.set({ "n", "v" }, "<space>", "<nop>")
 -- word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -76,6 +75,7 @@ vim.keymap.set("n", "TX", vim.cmd.tabclose)
 
 vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set("n", "<leader>Y", '"+Y')
+vim.keymap.set("v", "<enter>", '"+y') -- matching tmux copy
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 

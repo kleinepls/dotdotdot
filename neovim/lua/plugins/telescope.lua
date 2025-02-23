@@ -30,7 +30,7 @@ return {
 
       extensions = {
         ["ui-select"] = {
-          require("telescope.themes").get_dropdown(),
+          themes.get_dropdown(),
         },
       },
     }
@@ -43,9 +43,11 @@ return {
     vim.keymap.set("n", "<leader>fh", builtin.help_tags)
     vim.keymap.set("n", "<leader>fc", builtin.commands)
     vim.keymap.set("n", "<leader>fs", builtin.builtin)
-    vim.keymap.set("n", "<leader>fm", builtin.man_pages)
+    vim.keymap.set("n", "<leader>fm", builtin.marks)
+    vim.keymap.set("n", "<leader>fa", builtin.man_pages)
     vim.keymap.set("n", "<leader>?", builtin.oldfiles)
-    vim.keymap.set("n", "<leader>fr", builtin.resume)
+    vim.keymap.set("n", "<leader>fr", builtin.registers)
+    vim.keymap.set("n", "<leader>fe", builtin.resume)
     vim.keymap.set("n", "<leader>fk", builtin.keymaps)
     vim.keymap.set("n", "<leader>fq", builtin.quickfix)
 
@@ -66,15 +68,22 @@ return {
       builtin.grep_string { search = word, prompt_title = word }
     end)
 
+    vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find)
+    vim.keymap.set("n", "<leader>f/", function()
+      local word = vim.fn.expand "<cword>"
+      builtin.current_buffer_fuzzy_find()
+      if word ~= "" then
+        vim.fn.feedkeys(word)
+        -- doesn't work without deferring
+        vim.defer_fn(vim.cmd.stopinsert, 0)
+      end
+    end)
+
     vim.keymap.set("n", "<leader>af", function()
       builtin.find_files { cwd = utils.buffer_dir(), prompt_title = utils.buffer_dir() }
     end)
     vim.keymap.set("n", "<leader>ag", function()
       builtin.live_grep { cwd = utils.buffer_dir(), prompt_title = utils.buffer_dir() }
-    end)
-
-    vim.keymap.set("n", "<leader>/", function()
-      builtin.current_buffer_fuzzy_find(themes.get_dropdown { previewer = builtin.file_browser })
     end)
 
     -- misc
