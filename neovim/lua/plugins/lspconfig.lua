@@ -23,6 +23,7 @@ local lspconfig = {
 
     require("mason-tool-installer").setup {
       ensure_installed = {
+        "eslint_d",
         "gopls",
         "html",
         "lua_ls",
@@ -131,40 +132,32 @@ return {
       conform.setup {
         formatters_by_ft = {
           lua = { "stylua" },
-          javascript = { "prettierd", "prettier" },
-          typescript = { "prettierd", "prettier" },
-          javascriptreact = { "prettierd", "prettier" },
-          typescriptreact = { "prettierd", "prettier" },
-          vue = { "prettierd", "prettier" },
+          javascript = { "eslint_d", "prettierd", "prettier" },
+          typescript = { "eslint_d", "prettierd", "prettier" },
+          javascriptreact = { "eslint_d", "prettierd", "prettier" },
+          typescriptreact = { "eslint_d", "prettierd", "prettier" },
+          vue = { "eslint_d", "prettierd", "prettier" },
+        },
+        format_on_save = {
+          timeout_ms = 2000,
+          lsp_format = "fallback",
+          stop_after_first = true,
+          filter = function(client)
+            return client.name ~= "ts_ls" and client.name ~= "volar"
+          end,
         },
       }
 
-      vim.keymap.set("n", "<leader>ft", function()
+      vim.keymap.set("n", "<leader>f", function()
         conform.format {
-          bufnr = 0,
+          timeout_ms = 2000,
           lsp_format = "fallback",
           stop_after_first = true,
+          filter = function(client)
+            return client.name ~= "ts_ls" and client.name ~= "volar"
+          end,
         }
       end)
-
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function(args)
-          conform.format {
-            bufnr = args.buf,
-            lsp_format = "fallback",
-            stop_after_first = true,
-          }
-        end,
-      })
-
-      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-        group = vim.api.nvim_create_augroup("RestartPrettierd", { clear = true }),
-        pattern = "*prettier*",
-        callback = function()
-          vim.fn.system "prettierd restart"
-        end,
-      })
     end,
   },
 

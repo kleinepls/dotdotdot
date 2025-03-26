@@ -59,8 +59,6 @@ vim.opt.listchars = "tab:» →,leadmultispace:† · ‡ · ,trail:▫,precedes
 vim.opt.shortmess:append "c"
 vim.opt.completeopt = "menu,longest,preview"
 
-vim.opt.cursorline = true
-vim.opt.cursorlineopt = "number"
 vim.opt.signcolumn = "auto"
 vim.opt.expandtab = true
 vim.opt.hlsearch = true
