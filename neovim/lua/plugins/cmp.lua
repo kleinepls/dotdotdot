@@ -4,19 +4,15 @@ return {
   version = "*",
   opts = {
     signature = { enabled = true },
-    appearance = {
-      nerd_font_variant = "mono",
-      use_nvim_cmp_as_default = true,
-    },
-
+    appearance = { use_nvim_cmp_as_default = true },
     cmdline = {
       keymap = {
         ["<Tab>"] = {},
       },
     },
-
     completion = {
       documentation = { auto_show = true },
+      ghost_text = { enabled = true },
 
       menu = {
         auto_show = function(ctx)

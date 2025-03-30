@@ -126,30 +126,27 @@ return {
 
   {
     "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+        javascript = { "eslint_d", "prettierd", "prettier" },
+        typescript = { "eslint_d", "prettierd", "prettier" },
+        javascriptreact = { "eslint_d", "prettierd", "prettier" },
+        typescriptreact = { "eslint_d", "prettierd", "prettier" },
+        vue = { "eslint_d", "prettierd", "prettier" },
+      },
+      format_on_save = {
+        timeout_ms = 2000,
+        lsp_format = "fallback",
+        stop_after_first = true,
+        filter = function(client)
+          return client.name ~= "ts_ls" and client.name ~= "volar"
+        end,
+      },
+    },
     init = function()
-      local conform = require "conform"
-
-      conform.setup {
-        formatters_by_ft = {
-          lua = { "stylua" },
-          javascript = { "eslint_d", "prettierd", "prettier" },
-          typescript = { "eslint_d", "prettierd", "prettier" },
-          javascriptreact = { "eslint_d", "prettierd", "prettier" },
-          typescriptreact = { "eslint_d", "prettierd", "prettier" },
-          vue = { "eslint_d", "prettierd", "prettier" },
-        },
-        format_on_save = {
-          timeout_ms = 2000,
-          lsp_format = "fallback",
-          stop_after_first = true,
-          filter = function(client)
-            return client.name ~= "ts_ls" and client.name ~= "volar"
-          end,
-        },
-      }
-
       vim.keymap.set("n", "<leader>f", function()
-        conform.format {
+        require("conform").format {
           timeout_ms = 2000,
           lsp_format = "fallback",
           stop_after_first = true,

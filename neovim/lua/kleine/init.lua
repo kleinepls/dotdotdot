@@ -10,6 +10,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 local mel = require "melange/palettes/dark"
 vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
 vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
+vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Whitespace" })
 
 require "kleine.statusline"
 require "kleine.commands"
@@ -70,6 +71,8 @@ vim.keymap.set({ "n", "v" }, "<M-k>", "5k")
 vim.keymap.set("n", "TN", vim.cmd.tabnext)
 vim.keymap.set("n", "TP", vim.cmd.tabprevious)
 vim.keymap.set("n", "TX", vim.cmd.tabclose)
+vim.keymap.set("n", "]e", "<cmd>try | cnext | catch | cfirst | catch | endtry<cr>")
+vim.keymap.set("n", "[e", "<cmd>try | cprevious | catch | clast | catch | endtry<cr>")
 
 vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set("n", "<leader>Y", '"+Y')

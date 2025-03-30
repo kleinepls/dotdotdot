@@ -67,6 +67,23 @@ require("lazy").setup {
     },
 
     {
+      "stevearc/quicker.nvim",
+      event = "FileType qf",
+      opts = {},
+      init = function()
+        vim.keymap.set("n", "<leader>q", function()
+          require("quicker").toggle { focus = true, height = 8 }
+        end)
+        vim.keymap.set("n", "<leader>l", function()
+          require("quicker").toggle { focus = true, height = 8, loclist = true }
+        end)
+        vim.keymap.set("n", ">", function()
+          require("quicker").toggle_expand { before = 3, after = 3, add_to_existing = true }
+        end)
+      end,
+    },
+
+    {
       "savq/melange-nvim",
       lazy = false,
       priority = 1000,
