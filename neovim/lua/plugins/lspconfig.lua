@@ -10,12 +10,10 @@ local lspconfig = {
     local lspconfig = require "lspconfig"
     local telescope = require "telescope.builtin"
 
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 
     vim.keymap.set("n", "gd", telescope.lsp_definitions)
-    vim.keymap.set("n", "gr", telescope.lsp_references)
+    vim.keymap.set("n", "gs", telescope.lsp_references)
     vim.keymap.set("n", "gD", telescope.lsp_type_definitions)
     vim.keymap.set("n", "gI", telescope.lsp_implementations)
     vim.keymap.set("n", "<leader>ds", telescope.lsp_document_symbols)

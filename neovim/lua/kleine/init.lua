@@ -12,7 +12,6 @@ vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
 vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
 vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Whitespace" })
 
-require "kleine.statusline"
 require "kleine.commands"
 
 vim.diagnostic.config {
@@ -32,6 +31,8 @@ vim.keymap.set("n", "<leader>dg", function()
     virtual_lines = not vim.diagnostic.config().virtual_lines,
   }
 end)
+
+vim.opt.statusline = " %f%m   (%l, %L c%c)"
 
 vim.opt.autoindent = true
 vim.opt.wrap = false

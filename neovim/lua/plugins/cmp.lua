@@ -13,6 +13,7 @@ return {
     completion = {
       documentation = { auto_show = true },
       ghost_text = { enabled = true },
+      accept = { auto_brackets = { enabled = false } },
 
       menu = {
         auto_show = function(ctx)
