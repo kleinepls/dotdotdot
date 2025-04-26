@@ -47,7 +47,7 @@ return {
     vim.keymap.set("n", "gD", fzf.lsp_typedefs)
     vim.keymap.set("n", "gI", fzf.lsp_implementations)
     vim.keymap.set("n", "gc", fzf.lsp_incoming_calls)
-    vim.keymap.set("n", "go", fzf.lsp_outgoing_calls)
+    vim.keymap.set("n", "gC", fzf.lsp_outgoing_calls)
     vim.keymap.set("n", "gt", fzf.lsp_code_actions)
     vim.keymap.set("n", "gl", fzf.lsp_finder)
     vim.keymap.set("n", "<leader>ds", fzf.lsp_document_symbols)

@@ -22,11 +22,10 @@ return {
           "vue",
         },
         auto_install = true,
-
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
+        sync_install = false,
+        ignore_install = {},
+        modules = {},
+        highlight = { enable = true, additional_vim_regex_highlighting = false },
         indent = { enable = true },
 
         incremental_selection = {
@@ -39,13 +38,39 @@ return {
         },
 
         textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+            },
+          },
+
           swap = {
             enable = true,
             swap_next = {
-              ["<leader>z"] = "@parameter.inner",
+              ["]z"] = "@parameter.inner",
             },
             swap_previous = {
-              ["<leader>Z"] = "@parameter.inner",
+              ["]x"] = "@parameter.inner",
+            },
+          },
+
+          move = {
+            enable = true,
+            -- set_jumps = true,
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
             },
           },
         },
@@ -55,10 +80,9 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-context",
-    config = function()
-      local ctx = require "treesitter-context"
-      ctx.setup { max_lines = 3 }
-      vim.keymap.set("n", "[c", ctx.go_to_context, { silent = true })
+    opts = { max_lines = 3 },
+    init = function()
+      vim.keymap.set("n", "[c", require("treesitter-context").go_to_context, { silent = true })
     end,
   },
 }

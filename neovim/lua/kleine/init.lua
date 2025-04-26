@@ -72,8 +72,6 @@ vim.keymap.set({ "n", "v" }, "<M-k>", "5k")
 vim.keymap.set("n", "TN", vim.cmd.tabnext)
 vim.keymap.set("n", "TP", vim.cmd.tabprevious)
 vim.keymap.set("n", "TX", vim.cmd.tabclose)
-vim.keymap.set("n", "]e", "<cmd>try | cnext | catch | cfirst | catch | endtry<cr>")
-vim.keymap.set("n", "[e", "<cmd>try | cprevious | catch | clast | catch | endtry<cr>")
 
 vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set("n", "<leader>Y", '"+Y')
@@ -93,7 +91,27 @@ vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.opt.updatetime = 50
 
--- text replacing, todo: make this nicer
+-- text replacing
 vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>rl", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>")
+
+-- todo :h setqflist
+vim.keymap.set("n", "]e", function()
+  if #vim.fn.getqflist() == 0 then
+    vim.notify("No items in quickfix list.", vim.log.levels.INFO)
+    return
+  end
+  if not pcall(vim.cmd.cn) then
+    vim.cmd.cfirst()
+  end
+end)
+vim.keymap.set("n", "]E", function()
+  if #vim.fn.getqflist() == 0 then
+    vim.notify("No items in quickfix list.", vim.log.levels.INFO)
+    return
+  end
+  if not pcall(vim.cmd.cN) then
+    vim.cmd.clast()
+  end
+end)
