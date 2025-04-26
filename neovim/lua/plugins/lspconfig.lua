@@ -8,20 +8,9 @@ local lspconfig = {
   },
   init = function()
     local lspconfig = require "lspconfig"
-    local telescope = require "telescope.builtin"
-
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-
-    vim.keymap.set("n", "gd", telescope.lsp_definitions)
-    vim.keymap.set("n", "gs", telescope.lsp_references)
-    vim.keymap.set("n", "gD", telescope.lsp_type_definitions)
-    vim.keymap.set("n", "gI", telescope.lsp_implementations)
-    vim.keymap.set("n", "<leader>ds", telescope.lsp_document_symbols)
-    vim.keymap.set("n", "<leader>ws", telescope.lsp_dynamic_workspace_symbols)
 
     require("mason-tool-installer").setup {
       ensure_installed = {
-        "eslint_d",
         "gopls",
         "html",
         "lua_ls",
@@ -36,20 +25,6 @@ local lspconfig = {
     require("mason-lspconfig").setup_handlers {
       function(server_name)
         lspconfig[server_name].setup {}
-      end,
-
-      ["lua_ls"] = function()
-        lspconfig.lua_ls.setup {
-          settings = {
-            Lua = {
-              completion = {
-                displayContext = 1,
-                callSnippet = "Both",
-              },
-              diagnostics = { disable = { "missing-fields" } },
-            },
-          },
-        }
       end,
 
       -- reference: https://github.com/williamboman/mason-lspconfig.nvim/issues/371#issuecomment-2188015156
@@ -160,7 +135,6 @@ return {
     "mfussenegger/nvim-lint",
     init = function()
       require("lint").linters_by_ft = {
-        css = { "stylint" },
         javascript = { "eslint_d" },
         javascriptreact = { "eslint_d" },
         json = { "jsonlint" },
