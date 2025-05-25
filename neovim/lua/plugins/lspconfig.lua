@@ -1,75 +1,52 @@
-local lspconfig = {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    { "folke/lazydev.nvim", ft = "lua", opts = {} },
-    { "williamboman/mason.nvim", opts = {} },
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-  },
-  init = function()
-    local lspconfig = require "lspconfig"
+local mason_packages = vim.fn.stdpath "data" .. "/mason/packages"
 
-    require("mason-tool-installer").setup {
+vim.lsp.config("ts_ls", {
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = mason_packages .. "/vue-language-server/node_modules/@vue/language-server",
+        languages = { "vue" },
+      },
+    },
+  },
+})
+
+vim.lsp.config("vue_ls", {
+  init_options = {
+    vue = {
+      hybridMode = false,
+    },
+    typescript = {
+      tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+    },
+  },
+})
+
+return {
+  {
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      { "folke/lazydev.nvim", opts = {}, ft = "lua" },
+      { "mason-org/mason.nvim", opts = {} },
+      { "neovim/nvim-lspconfig" },
+    },
+    opts = {
       ensure_installed = {
         "gopls",
         "html",
         "lua_ls",
         "rust_analyzer",
-        "stylua",
         "tailwindcss",
         "ts_ls",
-        "volar",
+        "vue_ls",
       },
-    }
+    },
+  },
 
-    require("mason-lspconfig").setup_handlers {
-      function(server_name)
-        lspconfig[server_name].setup {}
-      end,
-
-      -- reference: https://github.com/williamboman/mason-lspconfig.nvim/issues/371#issuecomment-2188015156
-      ["ts_ls"] = function()
-        local mason_registry = require "mason-registry"
-        local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-          .. "/node_modules/@vue/language-server"
-
-        lspconfig.ts_ls.setup {
-          init_options = {
-            plugins = {
-              {
-                name = "@vue/typescript-plugin",
-                location = vue_language_server_path,
-                languages = { "vue" },
-              },
-            },
-          },
-        }
-      end,
-
-      ["volar"] = function()
-        local mason_registry = require "mason-registry"
-        local ts_ls_path = mason_registry.get_package("vue-language-server"):get_install_path()
-          .. "/node_modules/typescript/lib/"
-
-        lspconfig.volar.setup {
-          init_options = {
-            vue = {
-              hybridMode = false,
-            },
-            typescript = {
-              tsdk = ts_ls_path,
-            },
-          },
-        }
-      end,
-    }
-  end,
-}
-
-return {
-  lspconfig,
   { "dmmulroy/tsc.nvim", opts = {} },
   { "j-hui/fidget.nvim", opts = {} },
+
   {
     "Fildo7525/pretty_hover",
     event = "LspAttach",
@@ -78,22 +55,6 @@ return {
     },
     init = function()
       vim.keymap.set("n", "K", require("pretty_hover").hover)
-    end,
-  },
-
-  {
-    "folke/trouble.nvim",
-    cmd = "Trouble",
-    opts = {},
-    init = function()
-      vim.keymap.set("n", "<leader>tp", "<cmd>Trouble diagnostics toggle focus<cr>")
-      vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle focus filter.buf=0<cr>")
-
-      vim.keymap.set("n", "<leader>ts", "<cmd>Trouble symbols toggle focus<cr>")
-
-      vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle focus<cr>")
-
-      vim.keymap.set("n", "<leader>tl", "<cmd>Trouble lsp toggle win.position=bottom<cr>")
     end,
   },
 
@@ -151,6 +112,22 @@ return {
           end
         end,
       })
+    end,
+  },
+
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    opts = {},
+    init = function()
+      vim.keymap.set("n", "<leader>tp", "<cmd>Trouble diagnostics toggle focus<cr>")
+      vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle focus filter.buf=0<cr>")
+
+      vim.keymap.set("n", "<leader>ts", "<cmd>Trouble symbols toggle focus<cr>")
+
+      vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle focus<cr>")
+
+      vim.keymap.set("n", "<leader>tl", "<cmd>Trouble lsp toggle win.position=bottom<cr>")
     end,
   },
 }

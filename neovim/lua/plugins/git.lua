@@ -26,7 +26,7 @@ local gitsigns = {
       },
 
       signcolumn = false,
-      numhl = true,
+      numhl = false,
 
       attach_to_untracked = true,
 

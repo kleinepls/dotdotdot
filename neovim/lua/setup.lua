@@ -50,12 +50,10 @@ require("lazy").setup {
         },
       },
       init = function()
-        local oil = require "oil"
-
         vim.keymap.set("n", "-", vim.cmd.Oil, { desc = "Oil" })
-        vim.keymap.set("n", "<leader>of", oil.toggle_float, { desc = "Oil floating window" })
+        vim.keymap.set("n", "<leader>of", require("oil").toggle_float, { desc = "Oil floating window" })
         vim.keymap.set("n", "<leader>o~", function()
-          oil.toggle_float "~"
+          require("oil").toggle_float "~"
         end, { desc = "Oil float ~" })
       end,
     },

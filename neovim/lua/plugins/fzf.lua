@@ -17,9 +17,6 @@ return {
     fzf.register_ui_select()
 
     vim.keymap.set("n", "<leader>fp", fzf.files)
-    vim.keymap.set("n", "<leader>fn", function()
-      fzf.files { cwd = "~/dotfiles" }
-    end)
     vim.keymap.set("n", "<leader>?", fzf.oldfiles)
     vim.keymap.set("n", "<leader>fq", fzf.quickfix)
     vim.keymap.set("n", "<leader>fs", fzf.quickfix_stack)
@@ -64,14 +61,23 @@ return {
     vim.keymap.set("n", "<leader>fk", fzf.keymaps)
 
     vim.keymap.set("n", "<leader>f/", function()
+      local word = vim.fn.expand "<cword>"
       fzf.lgrep_curbuf()
-      vim.fn.feedkeys(vim.fn.expand "<cword>")
+      vim.fn.feedkeys(word)
     end)
     vim.keymap.set("n", "<leader>af", function()
       fzf.files { cwd = vim.fn.expand "%:h" }
     end)
     vim.keymap.set("n", "<leader>ag", function()
       fzf.live_grep_native { cwd = vim.fn.expand "%:h" }
+    end)
+
+    vim.keymap.set("n", "<leader>fn", function()
+      fzf.files { cwd = "~/dotfiles" }
+    end)
+
+    vim.keymap.set("n", "<leader>go", function()
+      fzf.files { cwd = "/usr/local/go/src/" }
     end)
   end,
 }
