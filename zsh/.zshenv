@@ -1,5 +1,7 @@
 . "$HOME/.cargo/env"
 
+export MANPAGER="nvim +Man!"
+
 export WINEPREFIX="$HOME/.wine"
 
 export GOPATH="$HOME/.local/go"

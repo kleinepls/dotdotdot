@@ -32,7 +32,7 @@ vim.keymap.set("n", "<leader>dg", function()
   }
 end)
 
-vim.opt.statusline = " %f%m   (%l, %L c%c)"
+vim.opt.statusline = " %f%m   (%l, %L %c)"
 
 vim.opt.autoindent = true
 vim.opt.wrap = false
@@ -96,6 +96,7 @@ vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left
 vim.keymap.set("n", "<leader>rl", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>")
 
+-- quickfix list navigation
 -- todo :h setqflist
 vim.keymap.set("n", "]e", function()
   if #vim.fn.getqflist() == 0 then

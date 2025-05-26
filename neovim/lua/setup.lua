@@ -141,12 +141,5 @@ require("lazy").setup {
         vim.keymap.set("n", "<leader><leader>l", ss.swap_buf_right)
       end,
     },
-
-    {
-      "eandrju/cellular-automaton.nvim",
-      init = function()
-        vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
-      end,
-    },
   },
 }

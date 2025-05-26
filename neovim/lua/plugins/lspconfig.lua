@@ -74,18 +74,18 @@ return {
         lsp_format = "fallback",
         stop_after_first = true,
         filter = function(client)
-          return client.name ~= "ts_ls" and client.name ~= "volar"
+          return client.name ~= "ts_ls" and client.name ~= "vue_ls"
         end,
       },
     },
     init = function()
-      vim.keymap.set("n", "<leader>f", function()
+      vim.keymap.set("n", "<leader>gf", function()
         require("conform").format {
           timeout_ms = 2000,
           lsp_format = "fallback",
           stop_after_first = true,
           filter = function(client)
-            return client.name ~= "ts_ls" and client.name ~= "volar"
+            return client.name ~= "ts_ls" and client.name ~= "vue_ls"
           end,
         }
       end)
