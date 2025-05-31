@@ -12,6 +12,17 @@ vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
 vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
 vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Whitespace" })
 
+local transparent = false
+vim.api.nvim_create_user_command("Transparent", function()
+  if transparent then
+    transparent = false
+    vim.api.nvim_set_hl(0, "Normal", { bg = "#1e1b1a" })
+    return
+  end
+  transparent = true
+  vim.api.nvim_set_hl(0, "Normal", { bg = nil })
+end, {})
+
 require "kleine.commands"
 
 vim.diagnostic.config {
