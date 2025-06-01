@@ -43,14 +43,14 @@ vim.keymap.set("n", "<leader>dg", function()
   }
 end)
 
-vim.opt.statusline = " %f%m   (%l, %L %c)"
+vim.o.statusline = " %f%m   (%l, %L %c)"
 
-vim.opt.autoindent = true
-vim.opt.wrap = false
-vim.opt.smartcase = true
-vim.opt.smartindent = true
-vim.opt.nu = true
-vim.opt.rnu = true
+vim.o.autoindent = true
+vim.o.wrap = false
+vim.o.smartcase = true
+vim.o.smartindent = true
+vim.o.nu = true
+vim.o.rnu = true
 
 -- tmux-sessionizer
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
@@ -67,16 +67,16 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = false })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = false })
 
-vim.opt.list = true
-vim.opt.listchars = "tab:» →,leadmultispace:† · ‡ · ,trail:▫,precedes:←,extends:◊"
+vim.o.list = true
+vim.o.listchars = "tab:» →,leadmultispace:† · ‡ · ,trail:▫,precedes:←,extends:◊"
 vim.opt.shortmess:append "c"
-vim.opt.completeopt = "menu,longest,preview"
+vim.o.completeopt = "menu,longest,preview"
 
-vim.opt.signcolumn = "auto"
-vim.opt.expandtab = true
-vim.opt.hlsearch = true
-vim.opt.ignorecase = true
-vim.opt.incsearch = true
+vim.o.signcolumn = "auto"
+vim.o.expandtab = true
+vim.o.hlsearch = true
+vim.o.ignorecase = true
+vim.o.incsearch = true
 
 vim.keymap.set({ "n", "v" }, "<M-j>", "5j")
 vim.keymap.set({ "n", "v" }, "<M-k>", "5k")
@@ -90,17 +90,17 @@ vim.keymap.set("v", "<enter>", '"+y') -- matching tmux copy
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
-vim.opt.scrolloff = 8
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.tabstop = 4
-vim.opt.backup = false
+vim.o.scrolloff = 8
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.tabstop = 4
+vim.o.backup = false
 vim.opt.isfname:append "@-@"
-vim.opt.mouse = "a"
-vim.opt.swapfile = false
-vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
-vim.opt.undofile = true
-vim.opt.updatetime = 50
+vim.o.mouse = "a"
+vim.o.swapfile = false
+vim.o.undodir = os.getenv "HOME" .. "/.vim/undodir"
+vim.o.undofile = true
+vim.o.updatetime = 50
 
 -- text replacing
 vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")

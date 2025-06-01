@@ -4,7 +4,6 @@ return {
   version = "*",
   opts = {
     signature = { enabled = true },
-    appearance = { use_nvim_cmp_as_default = true },
     cmdline = {
       keymap = {
         ["<Tab>"] = {},

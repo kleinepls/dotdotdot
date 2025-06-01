@@ -62,6 +62,7 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
+        go = { "goimports" },
         lua = { "stylua" },
         javascript = { "eslint_d", "prettierd", "prettier" },
         typescript = { "eslint_d", "prettierd", "prettier" },
