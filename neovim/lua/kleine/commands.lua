@@ -4,7 +4,7 @@ vim.keymap.set("n", "<leader>cn", vim.cmd.CopyFileName)
 vim.keymap.set("n", "<leader>tw", vim.cmd.ToggleWordWrap)
 
 vim.keymap.set("n", "<leader>tn", function()
-  vim.opt.number = not vim.api.nvim_get_option_value("number", {})
+  vim.o.number = not vim.api.nvim_get_option_value("number", {})
 end)
 
 local function cleanup_path(path)
@@ -35,7 +35,7 @@ end, {})
 
 vim.api.nvim_create_user_command("ToggleWordWrap", function()
   local wrapped = vim.api.nvim_get_option_value("wrap", {})
-  vim.opt.wrap = not wrapped
+  vim.o.wrap = not wrapped
 
   if wrapped then
     vim.notify "Word wrapping disabled."

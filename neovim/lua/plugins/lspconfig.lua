@@ -23,6 +23,41 @@ vim.lsp.config("vue_ls", {
   },
 })
 
+vim.diagnostic.config {
+  signs = false,
+  severity_sort = true,
+  virtual_text = true,
+  virtual_lines = false,
+  float = {
+    border = "rounded",
+    source = true,
+  },
+}
+
+vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>dg", function()
+  vim.diagnostic.config {
+    virtual_lines = not vim.diagnostic.config().virtual_lines,
+  }
+end)
+
+vim.keymap.set("n", "<leader>dt", function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+    vim.notify "Diagnostics hidden."
+  else
+    vim.diagnostic.enable()
+    vim.notify "Diagnostics visible."
+  end
+end)
+
+vim.keymap.set("n", "K", function()
+  vim.lsp.buf.hover {
+    border = "rounded",
+    max_width = 80,
+  }
+end)
+
 return {
   {
     "mason-org/mason-lspconfig.nvim",
@@ -46,17 +81,6 @@ return {
 
   { "dmmulroy/tsc.nvim", opts = {} },
   { "j-hui/fidget.nvim", opts = {} },
-
-  {
-    "Fildo7525/pretty_hover",
-    event = "LspAttach",
-    opts = {
-      max_width = 80,
-    },
-    init = function()
-      vim.keymap.set("n", "K", require("pretty_hover").hover)
-    end,
-  },
 
   {
     "stevearc/conform.nvim",

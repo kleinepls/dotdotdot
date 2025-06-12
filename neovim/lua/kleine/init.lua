@@ -10,6 +10,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 local mel = require "melange/palettes/dark"
 vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
 vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
+vim.api.nvim_set_hl(0, "MatchParen", { fg = mel.b.yellow, bg = mel.a.sel, bold = true })
+vim.api.nvim_set_hl(0, "LspReferenceText", { bg = mel.a.float })
 vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Whitespace" })
 
 local transparent = false
@@ -24,24 +26,6 @@ vim.api.nvim_create_user_command("Transparent", function()
 end, {})
 
 require "kleine.commands"
-
-vim.diagnostic.config {
-  signs = false,
-  severity_sort = true,
-  virtual_text = true,
-  virtual_lines = false,
-  float = {
-    border = "rounded",
-    source = true,
-  },
-}
-
-vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float)
-vim.keymap.set("n", "<leader>dg", function()
-  vim.diagnostic.config {
-    virtual_lines = not vim.diagnostic.config().virtual_lines,
-  }
-end)
 
 vim.o.statusline = " %f%m   (%l, %L %c)"
 

@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-vim.opt.termguicolors = true
+vim.o.termguicolors = true
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -35,7 +35,7 @@ require("lazy").setup {
         view_options = { show_hidden = true },
         keymaps = {
           ["<C-s>"] = false,
-          ["<C-e>"] = "actions.select_split",
+          ["<C-e>"] = "actions.select_vsplit",
           ["<C-h>"] = false,
           ["<C-p>"] = false,
           ["<C-t>"] = "actions.preview",
