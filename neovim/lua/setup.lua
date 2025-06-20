@@ -25,6 +25,12 @@ require("lazy").setup {
   spec = {
     { import = "plugins" },
     "tpope/vim-sleuth",
+    "savq/melange-nvim",
+
+    {
+      "brenoprata10/nvim-highlight-colors",
+      opts = { render = "virtual", virtual_symbol_suffix = "" },
+    },
 
     {
       "stevearc/oil.nvim",
@@ -57,6 +63,7 @@ require("lazy").setup {
         end, { desc = "Oil float ~" })
       end,
     },
+
     {
       "mbbill/undotree",
       init = function()
@@ -64,28 +71,9 @@ require("lazy").setup {
       end,
     },
 
-    {
-      "echasnovski/mini.icons",
-      version = false,
-      opts = {},
-      specs = {
-        { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
-      },
-      init = function()
-        package.preload["nvim-web-devicons"] = function()
-          require("mini.icons").mock_nvim_web_devicons()
-          return package.loaded["nvim-web-devicons"]
-        end
-      end,
-    },
-    {
-      "echasnovski/mini.splitjoin",
-      version = false,
-      opts = {
-        mappings = { toggle = "<leader>S" },
-      },
-    },
+    { "echasnovski/mini.icons", version = false, opts = {} },
     { "echasnovski/mini.surround", version = false, opts = {} },
+    { "echasnovski/mini.splitjoin", version = false, opts = { mappings = { toggle = "<leader>S" } } },
 
     {
       "stevearc/quicker.nvim",
@@ -102,22 +90,6 @@ require("lazy").setup {
           require("quicker").toggle_expand { before = 3, after = 3, add_to_existing = true }
         end)
       end,
-    },
-
-    {
-      "savq/melange-nvim",
-      lazy = false,
-      priority = 1000,
-      init = function()
-        vim.cmd.colorscheme "melange"
-      end,
-    },
-    {
-      "brenoprata10/nvim-highlight-colors",
-      opts = {
-        render = "virtual",
-        virtual_symbol_suffix = "",
-      },
     },
 
     {

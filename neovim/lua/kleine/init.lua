@@ -7,6 +7,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
+vim.cmd.colorscheme "melange"
 local mel = require "melange/palettes/dark"
 vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
 vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
@@ -71,6 +72,7 @@ vim.keymap.set("n", "TX", vim.cmd.tabclose)
 vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("v", "<enter>", '"+y') -- matching tmux copy
+vim.keymap.set("n", "<leader>A", 'ggVG"+y<C-o>') -- copy file contents
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 

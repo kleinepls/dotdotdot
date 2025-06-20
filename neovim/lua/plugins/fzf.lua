@@ -5,11 +5,18 @@ return {
     local fzf = require "fzf-lua"
 
     fzf.setup {
-      "borderless",
+      "border-fused",
+      keymap = {
+        builtin = {
+          true,
+          ["<Esc>"] = "hide",
+        },
+      },
       winopts = {
         width = 0.85,
         preview = {
           horizontal = "right:55%",
+          wrap = true,
         },
       },
     }

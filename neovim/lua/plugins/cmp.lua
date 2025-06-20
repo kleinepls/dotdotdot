@@ -14,10 +14,10 @@ return {
       -- ghost_text = { enabled = true },
       accept = { auto_brackets = { enabled = false } },
       menu = {
-        auto_show = false,
-        -- auto_show = function(ctx)
-        --   return ctx.mode ~= "cmdline"
-        -- end,
+        auto_show = function(ctx)
+          local ft = vim.o.ft
+          return ctx.mode ~= "cmdline" and ft ~= "go" and ft ~= "rust"
+        end,
 
         draw = {
           columns = { { "label", "label_description", gap = 1 }, { "kind_icon", gap = 1, "kind" } },
