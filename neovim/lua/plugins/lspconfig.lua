@@ -59,6 +59,9 @@ vim.keymap.set("n", "K", function()
 end)
 
 return {
+  { "dmmulroy/tsc.nvim", opts = {} },
+  { "j-hui/fidget.nvim", opts = {} },
+
   {
     "mason-org/mason-lspconfig.nvim",
     dependencies = {
@@ -79,29 +82,29 @@ return {
     },
   },
 
-  { "dmmulroy/tsc.nvim", opts = {} },
-  { "j-hui/fidget.nvim", opts = {} },
-
   {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
         go = { "goimports" },
-        lua = { "stylua" },
         javascript = { "eslint_d", "prettierd", "prettier" },
         typescript = { "eslint_d", "prettierd", "prettier" },
         javascriptreact = { "eslint_d", "prettierd", "prettier" },
         typescriptreact = { "eslint_d", "prettierd", "prettier" },
         vue = { "eslint_d", "prettierd", "prettier" },
       },
-      format_on_save = {
-        timeout_ms = 2000,
-        lsp_format = "fallback",
-        stop_after_first = true,
-        filter = function(client)
-          return client.name ~= "ts_ls" and client.name ~= "vue_ls"
-        end,
-      },
+      format_on_save = function()
+        if vim.g.autoformat then
+          return {
+            timeout_ms = 2000,
+            lsp_format = "fallback",
+            stop_after_first = true,
+            filter = function(client)
+              return client.name ~= "ts_ls" and client.name ~= "vue_ls"
+            end,
+          }
+        end
+      end,
     },
     init = function()
       vim.keymap.set("n", "<leader>gf", function()
@@ -114,6 +117,18 @@ return {
           end,
         }
       end)
+
+      vim.g.autoformat = true
+      vim.keymap.set("n", "<leader>tf", vim.cmd.ToggleFormat)
+
+      vim.api.nvim_create_user_command("ToggleFormat", function()
+        vim.g.autoformat = not vim.g.autoformat
+        if not vim.g.autoformat then
+          vim.notify "Auto formatting disabled."
+        else
+          vim.notify "Auto formatting enabled."
+        end
+      end, {})
     end,
   },
 
