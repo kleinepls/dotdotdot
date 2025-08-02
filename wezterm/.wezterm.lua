@@ -15,8 +15,8 @@ local config = {
 	debug_key_events = true,
 	use_ime = false,
 
-	font_size = 18,
-	line_height = 1.3,
+	font_size = 17,
+	line_height = 1.2,
 
 	keys = {
 		{ key = "Backspace", mods = "CTRL", action = wezterm.action.SendKey({ key = "w", mods = "CTRL" }) },
@@ -27,6 +27,7 @@ local config = {
 		{ key = "^", mods = "CTRL", action = wezterm.action.SendString("\x1e") },
 		{ key = "6", mods = "CTRL", action = wezterm.action.SendString("\x1e") },
 
+		{ key = "/", mods = "CTRL", action = wezterm.action.SendString("\x1b[47;5u") },
 		{ key = "h", mods = "ALT", action = wezterm.action.SendKey({ key = "h", mods = "ALT" }) }, -- enables <A-h|j|k|l> mappings for nvim and tmux
 		{ key = "j", mods = "ALT", action = wezterm.action.SendKey({ key = "j", mods = "ALT" }) },
 		{ key = "k", mods = "ALT", action = wezterm.action.SendKey({ key = "k", mods = "ALT" }) },

@@ -1,26 +1,22 @@
-local mason_packages = vim.fn.stdpath "data" .. "/mason/packages"
+local vue_language_server_path = vim.fn.stdpath("data") ..
+    "/mason/packages/vue-language-server/node_modules/@vue/language-server"
 
-vim.lsp.config("ts_ls", {
-  init_options = {
-    plugins = {
-      {
-        name = "@vue/typescript-plugin",
-        location = mason_packages .. "/vue-language-server/node_modules/@vue/language-server",
-        languages = { "vue" },
+vim.lsp.config("vtsls", {
+  settings = {
+    vtsls = {
+      tsserver = {
+        globalPlugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = vue_language_server_path,
+            languages = { "vue" },
+            configNamespace = "typescript",
+          },
+        },
       },
     },
   },
-})
-
-vim.lsp.config("vue_ls", {
-  init_options = {
-    vue = {
-      hybridMode = false,
-    },
-    typescript = {
-      tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
-    },
-  },
+  filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 })
 
 vim.diagnostic.config {
@@ -38,6 +34,7 @@ vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>dg", function()
   vim.diagnostic.config {
     virtual_lines = not vim.diagnostic.config().virtual_lines,
+    virtual_text = not vim.diagnostic.config().virtual_text,
   }
 end)
 
@@ -60,7 +57,6 @@ end)
 
 return {
   { "dmmulroy/tsc.nvim", opts = {} },
-  { "j-hui/fidget.nvim", opts = {} },
 
   {
     "mason-org/mason-lspconfig.nvim",
@@ -76,7 +72,7 @@ return {
         "lua_ls",
         "rust_analyzer",
         "tailwindcss",
-        "ts_ls",
+        "vtsls",
         "vue_ls",
       },
     },

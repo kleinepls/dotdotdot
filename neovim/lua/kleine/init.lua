@@ -24,6 +24,7 @@ vim.api.nvim_create_user_command("Transparent", function()
 end, {})
 
 require "kleine.commands"
+require "kleine.terminal"
 
 -- tmux-sessionizer
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
@@ -47,7 +48,6 @@ vim.keymap.set({ "n", "v" }, "<M-k>", "5k")
 vim.keymap.set("n", "TN", vim.cmd.tabnext)
 vim.keymap.set("n", "TP", vim.cmd.tabprevious)
 vim.keymap.set("n", "TX", vim.cmd.tabclose)
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>") -- exit terminal mode
 
 vim.api.nvim_create_user_command("Terminal", function()
   vim.cmd.wincmd "v"
@@ -90,6 +90,7 @@ vim.keymap.set("n", "]E", function()
 end)
 
 vim.o.statusline = " %f%m   (%l, %L %c)"
+-- vim.o.statuscolumn = "%{v:lnum} %{v:relnum}"
 
 vim.o.list = true
 vim.o.listchars = "tab:» →,leadmultispace:† · ‡ · ,trail:▫,precedes:←,extends:◊"

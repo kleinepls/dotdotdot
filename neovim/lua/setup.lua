@@ -48,7 +48,7 @@ require("lazy").setup {
           ["."] = "actions.toggle_hidden",
         },
         float = {
-          padding = 10,
+          padding = 5,
           max_width = 150,
           win_options = {
             winblend = 0,

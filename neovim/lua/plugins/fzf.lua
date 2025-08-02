@@ -13,6 +13,7 @@ return {
         },
       },
       winopts = {
+        fullscreen = true,
         width = 0.85,
         preview = {
           horizontal = "right:55%",
@@ -36,7 +37,7 @@ return {
     vim.keymap.set("v", "<leader>fv", fzf.grep_visual)
     vim.keymap.set("n", "<leader>fw", fzf.grep_cword)
     vim.keymap.set("n", "<leader>W", fzf.grep_cWORD)
-    vim.keymap.set("n", "<leader>G", fzf.live_grep_glob)
+    vim.keymap.set("n", "<leader>G", fzf.live_grep)
 
     vim.keymap.set("n", "<leader>ff", fzf.git_files)
     vim.keymap.set("n", "<leader>gt", fzf.git_status)
