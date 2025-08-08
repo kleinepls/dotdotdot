@@ -11,6 +11,10 @@ return {
           true,
           ["<Esc>"] = "hide",
         },
+        fzf = {
+          true,
+          ["ctrl-q"] = "select-all+accept",
+        },
       },
       winopts = {
         fullscreen = true,
@@ -19,6 +23,9 @@ return {
           horizontal = "right:55%",
           wrap = true,
         },
+      },
+      oldfiles = {
+        include_current_session = true,
       },
     }
 

@@ -3,6 +3,24 @@ vim.keymap.set("n", "<leader>cf", vim.cmd.CopyPathFull)
 vim.keymap.set("n", "<leader>cn", vim.cmd.CopyFileName)
 vim.keymap.set("n", "<leader>tw", vim.cmd.ToggleWordWrap)
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("YankHighlight", {}),
+  pattern = "*",
+  callback = function() vim.highlight.on_yank() end,
+})
+
+local mel = require "melange/palettes/dark"
+local transparent = false
+vim.api.nvim_create_user_command("Transparent", function()
+  if transparent then
+    transparent = false
+    vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
+    return
+  end
+  transparent = true
+  vim.api.nvim_set_hl(0, "Normal", { bg = nil })
+end, {})
+
 vim.keymap.set("n", "<leader>gg", function()
   vim.ui.input({ prompt = "Search > " }, function(input)
     if input then

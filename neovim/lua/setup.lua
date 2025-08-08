@@ -1,7 +1,3 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-vim.o.termguicolors = true
-
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -23,95 +19,97 @@ require("lazy").setup {
   change_detection = { notify = false },
   rocks = { enabled = false },
   spec = {
-    { import = "plugins" },
     "tpope/vim-sleuth",
+    "mbbill/undotree",
     "savq/melange-nvim",
-
-    {
-      "brenoprata10/nvim-highlight-colors",
-      opts = { render = "virtual", virtual_symbol_suffix = "" },
-    },
-
-    {
-      "stevearc/oil.nvim",
-      dependencies = { "echasnovski/mini.icons" },
-      opts = {
-        columns = { "icon" },
-        skip_confirm_for_simple_edits = true,
-        view_options = { show_hidden = true },
-        keymaps = {
-          ["<C-s>"] = false,
-          ["<C-e>"] = "actions.select_vsplit",
-          ["<C-h>"] = false,
-          ["<C-p>"] = false,
-          ["<C-t>"] = "actions.preview",
-          ["."] = "actions.toggle_hidden",
-        },
-        float = {
-          padding = 5,
-          max_width = 150,
-          win_options = {
-            winblend = 0,
-          },
-        },
-      },
-      init = function()
-        vim.keymap.set("n", "-", vim.cmd.Oil, { desc = "Oil" })
-        vim.keymap.set("n", "<leader>of", require("oil").toggle_float, { desc = "Oil floating window" })
-        vim.keymap.set("n", "<leader>o~", function()
-          require("oil").toggle_float "~"
-        end, { desc = "Oil float ~" })
-      end,
-    },
-
-    {
-      "mbbill/undotree",
-      init = function()
-        vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-      end,
-    },
-
+    -- { "brenoprata10/nvim-highlight-colors", opts = { render = "virtual", virtual_symbol_suffix = "" } },
+    { "saghen/blink.cmp", dependencies = "rafamadriz/friendly-snippets", version = "*" },
     { "echasnovski/mini.icons", version = false, opts = {} },
     { "echasnovski/mini.surround", version = false, opts = {} },
-    { "echasnovski/mini.splitjoin", version = false, opts = { mappings = { toggle = "<leader>S" } } },
+    { "stevearc/quicker.nvim", event = "FileType qf", opts = {} },
+    "stevearc/oil.nvim",
+    "mrjones2014/smart-splits.nvim",
+    { "theprimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
 
-    {
-      "stevearc/quicker.nvim",
-      event = "FileType qf",
-      opts = {},
-      init = function()
-        vim.keymap.set("n", "<leader>q", function()
-          require("quicker").toggle { focus = true, height = 8 }
-        end)
-        vim.keymap.set("n", "<leader>l", function()
-          require("quicker").toggle { focus = true, height = 8, loclist = true }
-        end)
-        vim.keymap.set("n", ">", function()
-          require("quicker").toggle_expand { before = 3, after = 3, add_to_existing = true }
-        end)
-      end,
+    { import = "plugins" },
+  },
+}
+
+require "oil".setup {
+  columns = { "icon" },
+  skip_confirm_for_simple_edits = true,
+  view_options = { show_hidden = true },
+  keymaps = {
+    ["<C-s>"] = false,
+    ["<C-e>"] = "actions.select_vsplit",
+    ["<C-h>"] = false,
+    ["<C-p>"] = false,
+    ["<C-t>"] = "actions.preview",
+    ["."] = "actions.toggle_hidden",
+  },
+  float = {
+    padding = 5,
+    max_width = 150,
+    win_options = { winblend = 0 },
+  },
+}
+
+require "blink-cmp".setup {
+  signature = { enabled = true },
+  cmdline = {
+    keymap = {
+      ["<Tab>"] = {},
     },
-
-    {
-      "mrjones2014/smart-splits.nvim",
-      config = function()
-        local ss = require "smart-splits"
-        vim.keymap.set("n", "<A-H>", ss.resize_left)
-        vim.keymap.set("n", "<A-J>", ss.resize_down)
-        vim.keymap.set("n", "<A-K>", ss.resize_up)
-        vim.keymap.set("n", "<A-L>", ss.resize_right)
-
-        vim.keymap.set("n", "<A-h>", ss.move_cursor_left)
-        vim.keymap.set("n", "<A-j>", ss.move_cursor_down)
-        vim.keymap.set("n", "<A-k>", ss.move_cursor_up)
-        vim.keymap.set("n", "<A-l>", ss.move_cursor_right)
-        vim.keymap.set("n", "<A-/>", ss.move_cursor_previous)
-        -- swapping buffers between windows
-        vim.keymap.set("n", "<leader><leader>h", ss.swap_buf_left)
-        vim.keymap.set("n", "<leader><leader>j", ss.swap_buf_down)
-        vim.keymap.set("n", "<leader><leader>k", ss.swap_buf_up)
-        vim.keymap.set("n", "<leader><leader>l", ss.swap_buf_right)
+  },
+  completion = {
+    documentation = { auto_show = true },
+    accept = { auto_brackets = { enabled = false } },
+    menu = {
+      auto_show = function(ctx)
+        local ft = vim.o.ft
+        return ctx.mode ~= "cmdline" and ft ~= "go" and ft ~= "rust"
       end,
+      draw = {
+        columns = { { "label", "label_description", gap = 1 }, { "kind_icon", gap = 1, "kind" } },
+      },
     },
   },
 }
+
+vim.keymap.set("n", "<C-h>", function()
+  require "harpoon".ui:toggle_quick_menu(require "harpoon":list(), {
+    border = "rounded",
+    ui_width_ratio = 0.4,
+  })
+end)
+vim.keymap.set("n", "<leader>a", function() require "harpoon":list():add() end)
+vim.keymap.set("n", "<C-j>", function() require "harpoon":list():select(1) end)
+vim.keymap.set("n", "<C-k>", function() require "harpoon":list():select(2) end)
+vim.keymap.set("n", "<C-l>", function() require "harpoon":list():select(3) end)
+vim.keymap.set("n", "<C-;>", function() require "harpoon":list():select(4) end)
+vim.keymap.set("n", "<C-p>", function() require "harpoon":list():select(5) end)
+
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "-", vim.cmd.Oil)
+vim.keymap.set("n", "<leader>of", function() require "oil".toggle_float() end)
+vim.keymap.set("n", "<leader>o~", function() require "oil".toggle_float "~" end)
+
+vim.keymap.set("n", "<leader>q", function()
+  require("quicker").toggle { focus = true, height = 8 }
+end)
+vim.keymap.set("n", "<leader>l", function()
+  require("quicker").toggle { focus = true, height = 8, loclist = true }
+end)
+vim.keymap.set("n", ">", function()
+  require("quicker").toggle_expand { before = 3, after = 3, add_to_existing = true }
+end)
+
+vim.keymap.set("n", "<A-H>", function() require "smart-splits".resize_left() end)
+vim.keymap.set("n", "<A-J>", function() require "smart-splits".resize_down() end)
+vim.keymap.set("n", "<A-K>", function() require "smart-splits".resize_up() end)
+vim.keymap.set("n", "<A-L>", function() require "smart-splits".resize_right() end)
+vim.keymap.set("n", "<A-h>", function() require "smart-splits".move_cursor_left() end)
+vim.keymap.set("n", "<A-j>", function() require "smart-splits".move_cursor_down() end)
+vim.keymap.set("n", "<A-k>", function() require "smart-splits".move_cursor_up() end)
+vim.keymap.set("n", "<A-l>", function() require "smart-splits".move_cursor_right() end)
+vim.keymap.set("n", "<A-/>", function() require "smart-splits".move_cursor_previous() end)

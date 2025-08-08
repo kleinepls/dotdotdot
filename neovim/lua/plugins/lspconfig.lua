@@ -1,6 +1,3 @@
-local vue_language_server_path = vim.fn.stdpath("data") ..
-    "/mason/packages/vue-language-server/node_modules/@vue/language-server"
-
 vim.lsp.config("vtsls", {
   settings = {
     vtsls = {
@@ -8,7 +5,7 @@ vim.lsp.config("vtsls", {
         globalPlugins = {
           {
             name = "@vue/typescript-plugin",
-            location = vue_language_server_path,
+            location = vim.fn.stdpath "data" .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
             languages = { "vue" },
             configNamespace = "typescript",
           },
@@ -38,7 +35,7 @@ vim.keymap.set("n", "<leader>dg", function()
   }
 end)
 
-vim.keymap.set("n", "<leader>dt", function()
+vim.api.nvim_create_user_command("ToggleDiagnostics", function()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)
     vim.notify "Diagnostics hidden."
@@ -46,7 +43,7 @@ vim.keymap.set("n", "<leader>dt", function()
     vim.diagnostic.enable()
     vim.notify "Diagnostics visible."
   end
-end)
+end, {})
 
 vim.keymap.set("n", "K", function()
   vim.lsp.buf.hover {
@@ -96,20 +93,20 @@ return {
             lsp_format = "fallback",
             stop_after_first = true,
             filter = function(client)
-              return client.name ~= "ts_ls" and client.name ~= "vue_ls"
+              return client.name ~= "vtsls" and client.name ~= "vue_ls"
             end,
           }
         end
       end,
     },
     init = function()
-      vim.keymap.set("n", "<leader>gf", function()
+      vim.keymap.set("n", "<leader>F", function()
         require("conform").format {
           timeout_ms = 2000,
           lsp_format = "fallback",
           stop_after_first = true,
           filter = function(client)
-            return client.name ~= "ts_ls" and client.name ~= "vue_ls"
+            return client.name ~= "vtsls" and client.name ~= "vue_ls"
           end,
         }
       end)
