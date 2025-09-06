@@ -109,6 +109,7 @@ vim.o.statusline = " %f%m   (%l, %L %c)"
 
 vim.o.list = true
 vim.o.listchars = "tab:» →,leadmultispace:† · ‡ · ,trail:▫,precedes:←,extends:◊"
+vim.o.fillchars = "diff:╱"
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "auto"

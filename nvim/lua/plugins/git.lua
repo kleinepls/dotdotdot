@@ -7,7 +7,7 @@ vim.opt.diffopt = {
   "inline:char",
   "internal",
   -- "iwhite",
-  "linematch:40",
+  "linematch:200",
 }
 
 vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr><cmd>wincmd H<cr>")
