@@ -1,16 +1,14 @@
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "echasnovski/mini.icons" },
+  dependencies = { "nvim-mini/mini.icons" },
   config = function()
     local fzf = require "fzf-lua"
 
     fzf.setup {
-      "border-fused",
+      lsp = {
+        includeDeclaration = false,
+      },
       keymap = {
-        builtin = {
-          true,
-          ["<Esc>"] = "hide",
-        },
         fzf = {
           true,
           ["ctrl-q"] = "select-all+accept",
@@ -26,6 +24,7 @@ return {
       },
       oldfiles = {
         include_current_session = true,
+        cwd_only = true,
       },
     }
 

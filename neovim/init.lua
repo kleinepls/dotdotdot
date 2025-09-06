@@ -12,7 +12,19 @@ vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
 vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
 vim.api.nvim_set_hl(0, "MatchParen", { fg = mel.b.yellow, bg = mel.a.sel, bold = true })
 vim.api.nvim_set_hl(0, "LspReferenceText", { bg = mel.a.float })
-vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Whitespace" })
+vim.api.nvim_set_hl(0, "DiffDelete", { fg = mel.a.sel, bold = true })
+vim.api.nvim_set_hl(0, "DiffChange", { bg = mel.a.bg })
+
+vim.api.nvim_create_autocmd("BufEnter", { -- keep default diff hl for fugitive
+  pattern = "*.git//",
+  callback = function()
+    local fugitive_ns = vim.api.nvim_create_namespace "fugitive"
+    vim.api.nvim_set_hl(fugitive_ns, "DiffDelete", { bg = mel.d.red })
+
+    local win = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_hl_ns(win, fugitive_ns)
+  end,
+})
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
@@ -30,8 +42,8 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = false })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = false })
 
-vim.keymap.set({ "n", "v" }, "<M-j>", "5j")
-vim.keymap.set({ "n", "v" }, "<M-k>", "5k")
+vim.keymap.set({ "n", "v" }, "<M-j>", "7j")
+vim.keymap.set({ "n", "v" }, "<M-k>", "7k")
 vim.keymap.set("n", "TN", vim.cmd.tabnext)
 vim.keymap.set("n", "TP", vim.cmd.tabprevious)
 vim.keymap.set("n", "TX", vim.cmd.tabclose)
@@ -41,7 +53,7 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("v", "<enter>", '"+y') -- matching tmux copy
 vim.keymap.set("n", "<leader>A", 'ggVG"+y<C-o>') -- copy file contents
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>d", '"_d')
 
 -- text replacing
 vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- file
@@ -58,6 +70,18 @@ vim.keymap.set("i", "<c-j>", function() -- appends `json:""`
   vim.cmd.stopinsert()
   vim.fn.feedkeys "_yiwvUA `json:\"pbvuA\"`"
 end)
+
+vim.keymap.set("i", "<c-p>", function()
+  local ft = vim.bo.ft
+  if ft == "go" then
+    vim.fn.feedkeys "fmt.Println()i"
+  elseif ft == "typescript" or ft == "typescriptreact" or ft == "vue" or ft == "javascript" then
+    vim.fn.feedkeys "console.log()i"
+  end
+end)
+
+vim.keymap.set("i", "<c-f>", "<c-x><c-f>") -- autocomplete file names
+vim.keymap.set("i", "<c-l>", "<right><c-x><c-f>")
 
 -- quickfix list navigation
 -- todo :h setqflist

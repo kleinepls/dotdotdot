@@ -1,29 +1,37 @@
 vim.opt.diffopt = {
-  "algorithm:myers",
+  "algorithm:histogram",
   "closeoff",
   "context:999999",
   "filler",
   "indent-heuristic",
-  -- "inline:word",
+  "inline:char",
   "internal",
   -- "iwhite",
-  "linematch:200",
+  "linematch:40",
 }
 
 vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr><cmd>wincmd H<cr>")
-vim.keymap.set("n", "<leader>gv", vim.cmd.Gvdiffsplit)
-vim.keymap.set("n", "<leader>gp", "<cmd>Git push<cr>")
-vim.keymap.set("n", "<leader>gd", function()
-  vim.fn.feedkeys ":Gvdiffsplit dev"
-end)
+vim.keymap.set("n", "<leader>gd", function() vim.fn.feedkeys ":Gvdiffsplit dev" end)
 
-vim.keymap.set("n", "<leader>gf", function()
-  vim.fn.feedkeys ":DiffviewOpen origin/HEAD...HEAD"
-end)
+vim.keymap.set("n", "<leader>g;", function() vim.fn.feedkeys ":DiffviewOpen origin/HEAD...HEAD" end)
+vim.keymap.set("n", "<leader>gp", function() vim.cmd.DiffviewOpen("--imply-local") end)
+vim.keymap.set("n", "<leader>gh", function() vim.cmd.DiffviewFileHistory("% -f") end)
+vim.keymap.set("n", "<leader>gH", function() vim.cmd.DiffviewFileHistory() end)
 
 return {
   "tpope/vim-fugitive",
-  "sindrets/diffview.nvim",
+  "tpope/vim-rhubarb",
+
+  {
+    "sindrets/diffview.nvim",
+    opts = {
+      hooks = {
+        diff_buf_read = function()
+          vim.opt_local.wrap = true
+        end,
+      },
+    },
+  },
 
   {
     "lewis6991/gitsigns.nvim",
