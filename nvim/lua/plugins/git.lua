@@ -4,7 +4,7 @@ vim.opt.diffopt = {
   "context:999999",
   "filler",
   "indent-heuristic",
-  "inline:char",
+  "inline:word",
   "internal",
   -- "iwhite",
   "linematch:200",
@@ -17,6 +17,17 @@ vim.keymap.set("n", "<leader>g;", function() vim.fn.feedkeys ":DiffviewOpen orig
 vim.keymap.set("n", "<leader>gp", function() vim.cmd.DiffviewOpen("--imply-local") end)
 vim.keymap.set("n", "<leader>gh", function() vim.cmd.DiffviewFileHistory("% -f") end)
 vim.keymap.set("n", "<leader>gH", function() vim.cmd.DiffviewFileHistory() end)
+vim.keymap.set("n", "<leader>gP",
+  function() vim.cmd.DiffviewFileHistory("--range=origin/HEAD...HEAD --right-only --no-merges") end)
+
+-- keep default diff hl for fugitive and diffview-specific buffers
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "fugitive*.git//", "*DiffviewFilePanel", "*DiffviewFileHistoryPanel" },
+  callback = function()
+    vim.api.nvim_set_hl(0, "FugitiveDiffDelete", { bg = "#7D2A2F" })
+    vim.opt_local.winhl = "DiffDelete:FugitiveDiffDelete"
+  end,
+})
 
 return {
   "tpope/vim-fugitive",
@@ -25,9 +36,23 @@ return {
   {
     "sindrets/diffview.nvim",
     opts = {
+      default_args = {
+        DiffviewOpen = { "--imply-local" },
+      },
       hooks = {
         diff_buf_read = function()
           vim.opt_local.wrap = true
+        end,
+        -- this highlights diffs similarly to github.
+        -- https://github.com/sindrets/diffview.nvim/pull/258#issuecomment-1408689220
+        diff_buf_win_enter = function(_, _, ctx)
+          if ctx.layout_name:match("^diff2") then
+            if ctx.symbol == "a" then
+              vim.opt_local.winhl = "DiffAdd:DiffviewDiffAddAsDelete,DiffDelete:DiffviewDiffDelete"
+            elseif ctx.symbol == "b" then
+              vim.opt_local.winhl = "DiffDelete:DiffviewDiffDelete"
+            end
+          end
         end,
       },
     },

@@ -19,6 +19,7 @@ require("lazy").setup {
   change_detection = { notify = false },
   rocks = { enabled = false },
   spec = {
+    "tpope/vim-sleuth",
     "mbbill/undotree",
     "savq/melange-nvim",
     -- { "brenoprata10/nvim-highlight-colors", opts = { render = "virtual", virtual_symbol_suffix = "" } },
@@ -38,6 +39,7 @@ require "oil".setup {
   columns = { "icon" },
   skip_confirm_for_simple_edits = true,
   view_options = { show_hidden = true },
+  delete_to_trash = true,
   keymaps = {
     ["<C-s>"] = false,
     ["<C-e>"] = "actions.select_vsplit",

@@ -6,7 +6,6 @@ export WINEPREFIX="$HOME/.wine"
 
 export GOPATH="$HOME/.local/go"
 export PNPM_HOME="$HOME/Library/pnpm"
-export LSP="$HOME/.config/nvim/lua/plugins/lsp.lua"
 
 export PATH="$PNPM_HOME:$PATH"
 export PATH="$GOPATH/bin:$PATH"
