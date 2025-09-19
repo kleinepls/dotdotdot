@@ -1,6 +1,4 @@
 return {
-  { "windwp/nvim-ts-autotag", lazy = false, opts = {} },
-
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
@@ -82,9 +80,10 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-context",
+    event = "VeryLazy",
     opts = { max_lines = 3 },
     init = function()
-      vim.keymap.set("n", "[c", require("treesitter-context").go_to_context, { silent = true })
+      vim.keymap.set("n", "]C", function() require("treesitter-context").go_to_context() end, { silent = true })
     end,
   },
 }

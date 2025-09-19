@@ -41,7 +41,9 @@ return {
       },
       hooks = {
         diff_buf_read = function()
-          vim.opt_local.wrap = true
+          if vim.bo.filetype ~= "markdown" then
+            vim.opt_local.wrap = true
+          end
         end,
         -- this highlights diffs similarly to github.
         -- https://github.com/sindrets/diffview.nvim/pull/258#issuecomment-1408689220

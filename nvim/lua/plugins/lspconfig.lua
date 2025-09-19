@@ -16,6 +16,16 @@ vim.lsp.config("vtsls", {
   filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 })
 
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      workspace = {
+        library = { vim.env.VIMRUNTIME },
+      },
+    },
+  },
+})
+
 vim.diagnostic.config {
   signs = false,
   severity_sort = true,
@@ -58,7 +68,6 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     dependencies = {
-      { "folke/lazydev.nvim", opts = {}, ft = "lua" },
       { "mason-org/mason.nvim", opts = {} },
       { "neovim/nvim-lspconfig" },
     },
@@ -145,22 +154,6 @@ return {
           end
         end,
       })
-    end,
-  },
-
-  {
-    "folke/trouble.nvim",
-    cmd = "Trouble",
-    opts = {},
-    init = function()
-      vim.keymap.set("n", "<leader>tp", "<cmd>Trouble diagnostics toggle focus<cr>")
-      vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle focus filter.buf=0<cr>")
-
-      vim.keymap.set("n", "<leader>ts", "<cmd>Trouble symbols toggle focus<cr>")
-
-      vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle focus<cr>")
-
-      vim.keymap.set("n", "<leader>tl", "<cmd>Trouble lsp toggle win.position=bottom<cr>")
     end,
   },
 }

@@ -7,39 +7,28 @@ alias xbox="upower -e | grep gaming_input | xargs upower -i"
 alias copy="xclip -selection | clipboard"
 
 alias o="open ."
-alias zshc="nvim ~/.zshrc"
 alias zshrr="source ~/.zshrc"
 alias sshcopy="pbcopy < ~/.ssh/id_rsa.pub"
 alias kill4000="lsof -ti:4000 | xargs kill"
 
 
-# vim
 alias v="nvim"
-alias lsp="nvim ~/.config/nvim/lua/plugins/lsp.lua"
-alias alc="nvim $HOME/.config/alacritty/alacritty.toml"
-alias wez="nvim $HOME/.wezterm.lua"
-alias tmuc="nvim $HOME/.tmux.conf"
 alias vimc="cd ~/dotfiles/neovim && nvim ."
 alias obsi="cd $HOME/Documents/Obsidian\ Vault && nvim ."
 
 
-# GIT
 alias g="git"
+alias gcd="git checkout dev"
 alias gl="git pull"
 alias gp="git push"
 alias gc="git commit -m"
-alias gco="git checkout"
-alias gcom="git checkout master"
-alias gmd="git checkout develop && git pull && git checkout - && git merge develop"
+alias gch="git checkout"
+alias gcb="git checkout -b"
+alias gmd="git checkout dev && git pull && git checkout - && git merge dev"
 alias gb="git branch"
 alias nah="git reset --hard && git clean -df"
 alias log="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gclear="gb | grep -v 'develop' | grep -v 'release' | xargs git branch -d"
-
-
-# node
-alias n="nvm use"
-alias test="npm run test"
+alias gclear="gb | grep -v 'develop' | grep -v 'dev' | grep -v 'master' | grep -v 'release' | xargs git branch -d"
 
 
 # Laravel

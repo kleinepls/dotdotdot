@@ -16,7 +16,7 @@ local config = {
 	use_ime = false,
 
 	font_size = 17,
-	line_height = 1.2,
+	line_height = 1.3,
 
 	keys = {
 		{ key = "Backspace", mods = "CTRL", action = wezterm.action.SendKey({ key = "w", mods = "CTRL" }) },

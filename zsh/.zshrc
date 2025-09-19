@@ -3,19 +3,26 @@
 #         https://github.com/marlonrichert/zsh-snap.git ~/znap
 # source ~/znap/znap.zsh
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-
 eval "$(starship init zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
+
+autoload -U compinit; compinit
+source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source ~/.zshenv
+source ~/.zsh_profile
 
 bindkey -s ^f 'tmux-sessionizer\n'
 
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
 
-source ~/.zshenv
-source ~/.zsh_profile
+setopt SHARE_HISTORY
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+export EDITOR=nvim
