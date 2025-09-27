@@ -2,6 +2,7 @@
 alias ls='ls --color=auto'
 alias la='ls -lah'
 alias ll='ls -lh'
+alias ..='cd ..'
 
 alias xbox="upower -e | grep gaming_input | xargs upower -i"
 alias copy="xclip -selection | clipboard"

@@ -1,6 +1,9 @@
 . "$HOME/.cargo/env"
 
+export EDITOR=nvim
 export MANPAGER="nvim +Man!"
+
+export FZF_DEFAULT_OPTS="--bind 'ctrl-f:half-page-down,ctrl-b:half-page-up'"
 
 export WINEPREFIX="$HOME/.wine"
 

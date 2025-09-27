@@ -25,30 +25,35 @@ vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("i", "<Up>", "<C-o>gk")
 vim.keymap.set("i", "<Down>", "<C-o>gj")
--- moving lines/text in visual mode
+-- move lines in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- keep cursor in place when joining
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = false })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = false })
 
 vim.keymap.set({ "n", "v" }, "<M-j>", "7j")
 vim.keymap.set({ "n", "v" }, "<M-k>", "7k")
+-- tab navigation
 vim.keymap.set("n", "TN", vim.cmd.tabnext)
 vim.keymap.set("n", "TP", vim.cmd.tabprevious)
 vim.keymap.set("n", "TX", vim.cmd.tabclose)
 
+-- paste maintaining unnamed register
 vim.keymap.set("x", "<leader>p", '"_dP')
-vim.keymap.set("n", "<leader>Y", '"+Y')
-vim.keymap.set("v", "<enter>", '"+y') -- matching tmux copy
-vim.keymap.set("n", "<leader>A", 'ggVG"+y<C-o>') -- copy file contents
+-- copy to system
+vim.keymap.set("v", "<enter>", '"+y')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+-- copy file contents
+vim.keymap.set("n", "<leader>A", 'ggVG"+y<C-o>')
+-- delete to void register
 vim.keymap.set("v", "<leader>d", '"_d')
 
 -- text replacing
-vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- file
-vim.keymap.set("n", "<leader>rl", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- line
-vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>") -- file with "0
+vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- entire file
+vim.keymap.set("n", "<leader>rl", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- current line
+vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>") -- entire file with "0 register
 
 -- go keymaps
 vim.keymap.set("n", "<leader>er", "oif err != nil {<Enter>}<Esc>Oreturn err<Esc>")
@@ -70,28 +75,17 @@ vim.keymap.set("i", "<c-p>", function()
   end
 end)
 
-vim.keymap.set("i", "<c-f>", "<c-x><c-f>") -- autocomplete file names
+-- autocomplete file names
+vim.keymap.set("i", "<c-f>", "<c-x><c-f>")
 vim.keymap.set("i", "<c-l>", "<right><c-x><c-f>")
 
 -- quickfix list navigation
 -- todo :h setqflist
 vim.keymap.set("n", "]e", function()
-  if #vim.fn.getqflist() == 0 then
-    vim.notify("No items in quickfix list.", vim.log.levels.INFO)
-    return
-  end
-  if not pcall(vim.cmd.cn) then
-    vim.cmd.cfirst()
-  end
+  if not pcall(vim.cmd.cn) then pcall(vim.cmd.cfirst) end
 end)
 vim.keymap.set("n", "]E", function()
-  if #vim.fn.getqflist() == 0 then
-    vim.notify("No items in quickfix list.", vim.log.levels.INFO)
-    return
-  end
-  if not pcall(vim.cmd.cN) then
-    vim.cmd.clast()
-  end
+  if not pcall(vim.cmd.cN) then pcall(vim.cmd.clast) end
 end)
 
 vim.o.statusline = " %f%m   (%l, %L %c)"
@@ -120,6 +114,7 @@ vim.o.smartcase = true
 vim.opt.shortmess:append "c"
 
 vim.o.scrolloff = 8
+vim.o.sidescrolloff = 7
 vim.o.shiftwidth = 4
 vim.o.backup = false
 vim.opt.isfname:append "@-@"

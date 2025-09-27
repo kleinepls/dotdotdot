@@ -18,11 +18,21 @@ source ~/.zsh_profile
 
 bindkey -s ^f 'tmux-sessionizer\n'
 
-bindkey '^[[1;5C' forward-word
-bindkey '^[[1;5D' backward-word
-bindkey '^[[1~' beginning-of-line
-bindkey '^[[4~' end-of-line
+bindkey '^[[1;5C' forward-word # <c-right>
+bindkey '^[[1;5D' backward-word # <c-left>
+bindkey '^[[1~' beginning-of-line # <c-home>
+bindkey '^[[4~' end-of-line # <c-end>
 
+setopt autocd
 setopt SHARE_HISTORY
 
-export EDITOR=nvim
+function buildnvim() {
+    local prev=$(nvim --version | head -n 1)
+    cd ~/sources/neovim
+    git pull
+    sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install
+    cd -
+    echo "$prev >>"
+    nvim --version
+}
