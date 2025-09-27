@@ -1,3 +1,16 @@
+local function full_window(fn)
+  return function()
+    fn {
+      winopts = {
+        height = 0.9,
+        width = 0.9,
+        row = 0.35,
+        col = 0.50,
+      },
+    }
+  end
+end
+
 return {
   "ibhagwan/fzf-lua",
   dependencies = { "nvim-mini/mini.icons" },
@@ -15,8 +28,10 @@ return {
         },
       },
       winopts = {
-        fullscreen = true,
-        width = 0.85,
+        height = 0.65,
+        width = 1,
+        row = 1,
+        col = 1,
         preview = {
           horizontal = "right:55%",
           wrap = true,
@@ -67,12 +82,14 @@ return {
     vim.keymap.set("n", "<leader>wi", fzf.lsp_workspace_diagnostics)
 
     vim.keymap.set("n", "<leader>fe", fzf.resume)
-    vim.keymap.set("n", "<leader>fh", fzf.help_tags)
+    vim.keymap.set("n", "<leader>fh", fzf.helptags)
     vim.keymap.set("n", "<leader>fl", fzf.highlights)
     vim.keymap.set("n", "<leader>fc", fzf.commands)
     vim.keymap.set("n", "<leader>fm", fzf.marks)
+    vim.keymap.set("n", "<leader>fM", fzf.manpages)
     vim.keymap.set("n", "<leader>fr", fzf.registers)
-    vim.keymap.set("n", "<leader>fk", fzf.keymaps)
+    vim.keymap.set("n", "<leader>fa", fzf.tagstack)
+    vim.keymap.set("n", "<leader>fk", full_window(fzf.keymaps))
 
     vim.keymap.set("n", "<leader>/", fzf.lgrep_curbuf)
     vim.keymap.set("n", "<leader>f/", function()
@@ -81,19 +98,11 @@ return {
       vim.fn.feedkeys(word)
     end)
 
-    vim.keymap.set("n", "<leader>af", function()
-      fzf.files { cwd = vim.fn.expand "%:h" }
-    end)
-    vim.keymap.set("n", "<leader>ag", function()
-      fzf.live_grep_native { cwd = vim.fn.expand "%:h" }
-    end)
+    vim.keymap.set("n", "<leader>af", function() fzf.files { cwd = vim.fn.expand "%:h" } end)
+    vim.keymap.set("n", "<leader>ag", function() fzf.live_grep_native { cwd = vim.fn.expand "%:h" } end)
 
-    vim.keymap.set("n", "<leader>fn", function()
-      fzf.files { cwd = "~/dotfiles" }
-    end)
+    vim.keymap.set("n", "<leader>fn", function() fzf.files { cwd = "~/dotfiles" } end)
 
-    vim.keymap.set("n", "<leader>go", function()
-      fzf.files { cwd = "/usr/local/go/src/" }
-    end)
+    vim.keymap.set("n", "<leader>go", function() fzf.files { cwd = "/usr/local/go/src/" } end)
   end,
 }

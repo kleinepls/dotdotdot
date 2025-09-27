@@ -73,7 +73,7 @@ return {
         vim.keymap.set("n", "<leader>hb", function() require "gitsigns".blame() end)
         vim.keymap.set("n", "<leader>hd", function() require "gitsigns".diffthis() end)
         vim.keymap.set("n", "<leader>hD", function() require "gitsigns".diffthis("~1") end)
-        vim.keymap.set("n", "<leader>hl", function() require "gitsigns".toggle_linehl() end)
+        vim.keymap.set("n", "<leader>hl", function() require "gitsigns".toggle_deleted() end)
         vim.keymap.set("n", "<leader>ht", function() require "gitsigns".toggle_current_line_blame() end)
       end,
     },
