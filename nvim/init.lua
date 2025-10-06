@@ -5,6 +5,7 @@ vim.o.termguicolors = true
 require "setup"
 require "commands"
 require "terminal"
+require "marks"
 
 vim.cmd.colorscheme "melange"
 local mel = require "melange/palettes/dark"
@@ -33,6 +34,10 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = false })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = false })
 
+-- do not populate the jumplist with { and } movements
+vim.keymap.set("n", "{", "<cmd>keepjumps normal! {<cr>")
+vim.keymap.set("n", "}", "<cmd>keepjumps normal! }<cr>")
+
 vim.keymap.set({ "n", "v" }, "<M-j>", "7j")
 vim.keymap.set({ "n", "v" }, "<M-k>", "7k")
 -- tab navigation
@@ -59,7 +64,7 @@ vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>") -- entire file 
 vim.keymap.set("n", "<leader>er", "oif err != nil {<Enter>}<Esc>Oreturn err<Esc>")
 vim.keymap.set("n", "<leader>ej", '_yiwvUA `json:"<Esc>pbvuA"`<Esc>V=')
 vim.keymap.set("i", "<c-n>", function()
-  vim.fn.feedkeys("if err != nil {o}Oreturn")
+  vim.fn.feedkeys("if err != nil {o}Oreturn err")
 end)
 vim.keymap.set("i", "<c-j>", function() -- appends `json:""`
   vim.cmd.stopinsert()

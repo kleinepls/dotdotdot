@@ -25,3 +25,7 @@ bindkey '^[[4~' end-of-line # <c-end>
 
 setopt autocd
 setopt SHARE_HISTORY
+
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' fzf-flags --bind ctrl-f:half-page-down,ctrl-b:half-page-up
+

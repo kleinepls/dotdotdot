@@ -16,7 +16,7 @@ local config = {
 	use_ime = false,
 
 	font = wezterm.font("CommitMono Nerd Font Mono"),
-	font_size = 17,
+	font_size = 16,
 	line_height = 1.3,
 
 	keys = {

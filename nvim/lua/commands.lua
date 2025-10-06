@@ -40,22 +40,22 @@ end)
 vim.api.nvim_create_user_command("CopyPath", function()
   local path = vim.fn.expand "%"
   vim.fn.setreg("+", path)
-  vim.notify('Copied "' .. path .. '" to the clipboard!')
+  vim.notify('copied "' .. path .. '"')
 end, {})
 
 vim.api.nvim_create_user_command("CopyPathFull", function()
   local path = vim.fn.expand "%:p"
   vim.fn.setreg("+", path)
-  vim.notify('Copied "' .. path .. '" to the clipboard!')
+  vim.notify('copied "' .. path .. '"')
 end, {})
 
 vim.api.nvim_create_user_command("CopyFileName", function()
   local file = vim.fn.expand "%:t"
   if file ~= "" then
     vim.fn.setreg("+", file)
-    vim.notify('Copied "' .. file .. '" to the clipboard!')
+    vim.notify('copied "' .. file .. '"')
   else
-    vim.notify "No file opened"
+    vim.notify "no file opened"
   end
 end, {})
 
@@ -64,9 +64,9 @@ vim.api.nvim_create_user_command("ToggleWordWrap", function()
   vim.o.wrap = not wrapped
 
   if wrapped then
-    vim.notify "Word wrapping disabled."
+    vim.notify "wrap=false"
     return
   end
 
-  vim.notify "Word wrapping enabled."
+  vim.notify "wrap=true"
 end, {})
