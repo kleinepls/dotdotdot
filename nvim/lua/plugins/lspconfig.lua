@@ -51,10 +51,10 @@ end)
 vim.api.nvim_create_user_command("ToggleDiagnostics", function()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)
-    vim.notify "Diagnostics hidden."
+    vim.notify "diagnostics=off"
   else
     vim.diagnostic.enable()
-    vim.notify "Diagnostics visible."
+    vim.notify "diagnostics=on"
   end
 end, {})
 
@@ -127,12 +127,12 @@ return {
       vim.keymap.set("n", "<leader>tf", vim.cmd.ToggleFormat)
 
       vim.api.nvim_create_user_command("ToggleFormat", function()
-        vim.g.autoformat = not vim.g.autoformat
-        if not vim.g.autoformat then
-          vim.notify "Auto formatting disabled."
+        if vim.g.autoformat then
+          vim.notify "auto formatting=off"
         else
-          vim.notify "Auto formatting enabled."
+          vim.notify "auto formatting=on"
         end
+        vim.g.autoformat = not vim.g.autoformat
       end, {})
     end,
   },

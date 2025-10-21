@@ -70,6 +70,8 @@ return {
 
     vim.keymap.set("n", "gs", fzf.lsp_references)
     vim.keymap.set("n", "gd", fzf.lsp_definitions)
+    -- go to reference in a new split window
+    vim.keymap.set("n", "gW", "<cmd>wincmd v<cr><cmd>wincmd l<cr><cmd>normal gd<cr>")
     vim.keymap.set("n", "gD", fzf.lsp_typedefs)
     vim.keymap.set("n", "gI", fzf.lsp_implementations)
     vim.keymap.set("n", "gc", fzf.lsp_incoming_calls)
@@ -103,6 +105,6 @@ return {
 
     vim.keymap.set("n", "<leader>fn", function() fzf.files { cwd = "~/dotfiles" } end)
 
-    vim.keymap.set("n", "<leader>go", function() fzf.files { cwd = "/usr/local/go/src/" } end)
+    vim.keymap.set("n", "<leader>go", function() fzf.files { cwd = "~/.local/share/mise/installs/go/latest" } end)
   end,
 }

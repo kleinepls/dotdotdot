@@ -2,23 +2,24 @@
 
 # first setup ssh
 
-sudo pacman -S --noconfirm --needed zsh git tmux wezterm fzf ripgrep fd git-delta stow jq
+sudo pacman -Syu
+sudo pacman -S --noconfirm --needed zsh tmux wezterm fzf ripgrep fd git-delta stow jq bat
 chsh -s $(which zsh)
 
-mkdir ~/code
+sudo pacman -S --noconfirm otf-commit-mono-nerd
+
 mv ~/.zshrc ~/.zshrc.old
+mkdir ~/code ~/.scripts
 ln -s ~/dotfiles/nvim ~/.config/nvim
-cd dotfiles
+ln ~/dotfiles/tmux-sessionizer ~/.scripts
+cd ~/dotfiles
 stow zsh
 stow wezterm
 stow tmux
-mkdir -p ~/.scripts
-ln ~/dotfiles/tmux-sessionizer ~/.scripts
 cd ~
 
 git clone git@github.com:tmux-plugins/tpm.git ~/.tmux/plugins/tpm
 git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-git clone git@github.com:zsh-users/zsh-history-substring-search.git ~/.zsh/zsh-history-substring-search
 git clone git@github.com:zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
 git clone git@github.com:Aloxaf/fzf-tab.git ~/.zsh/fzf-tab
 
@@ -26,4 +27,14 @@ curl -sS https://starship.rs/install.sh | sh
 starship preset nerd-font-symbols -o ~/.config/starship.toml
 curl https://mise.run | sh
 curl https://sh.rustup.rs -sSf | sh
+
+git config --global --add url."git@github.com:".insteadOf "https://github.com/"
+
+sudo pacman -S --needed --noconfirm base-devel cmake ninja curl
+git clone git@github.com:neovim/neovim.git ~/sources/neovim
+cd ~/sources/neovim
+sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+cd ~
+nvim --version
 

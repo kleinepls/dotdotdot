@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>tw", vim.cmd.ToggleWordWrap)
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("YankHighlight", {}),
   pattern = "*",
-  callback = function() vim.highlight.on_yank() end,
+  callback = function() vim.hl.on_yank() end,
 })
 
 local mel = require "melange/palettes/dark"

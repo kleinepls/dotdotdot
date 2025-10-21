@@ -13,18 +13,18 @@ vim.opt.diffopt = {
 vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr><cmd>wincmd H<cr>")
 vim.keymap.set("n", "<leader>gd", function() vim.fn.feedkeys ":Gvdiffsplit dev" end)
 
-vim.keymap.set("n", "<leader>g;", function() vim.fn.feedkeys ":DiffviewOpen origin/HEAD...HEAD" end)
-vim.keymap.set("n", "<leader>gp", function() vim.cmd.DiffviewOpen("--imply-local") end)
+vim.keymap.set("n", "<leader>g;", function() vim.cmd.DiffviewOpen "origin/HEAD...HEAD" end)
+vim.keymap.set("n", "<leader>gp", function() vim.cmd.DiffviewOpen() end)
 vim.keymap.set("n", "<leader>gh", function() vim.cmd.DiffviewFileHistory("% -f") end)
 vim.keymap.set("n", "<leader>gH", function() vim.cmd.DiffviewFileHistory() end)
-vim.keymap.set("n", "<leader>gP",
+vim.keymap.set("n", "<leader>gP", -- inspect branch history by commit
   function() vim.cmd.DiffviewFileHistory("--range=origin/HEAD...HEAD --right-only --no-merges") end)
 
 -- keep default diff hl for fugitive and diffview-specific buffers
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "fugitive*.git//", "*DiffviewFilePanel", "*DiffviewFileHistoryPanel" },
   callback = function()
-    vim.api.nvim_set_hl(0, "FugitiveDiffDelete", { bg = "#7D2A2F" })
+    vim.api.nvim_set_hl(0, "FugitiveDiffDelete", { bg = "#70252A" })
     vim.opt_local.winhl = "DiffDelete:FugitiveDiffDelete"
   end,
 })

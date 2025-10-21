@@ -15,7 +15,7 @@ vim.api.nvim_set_hl(0, "MatchParen", { fg = mel.b.yellow, bg = mel.a.sel, bold =
 vim.api.nvim_set_hl(0, "LspReferenceText", { bg = mel.a.float })
 vim.api.nvim_set_hl(0, "DiffDelete", { fg = mel.a.sel })
 vim.api.nvim_set_hl(0, "DiffChange", { bg = mel.a.bg })
-vim.api.nvim_set_hl(0, "DiffviewDiffAddAsDelete", { bg = mel.d.red, fg = mel.a.fg })
+vim.api.nvim_set_hl(0, "DiffviewDiffAddAsDelete", { bg = "#70252A" })
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
