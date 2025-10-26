@@ -77,17 +77,17 @@ require "blink-cmp".setup {
   },
 }
 
-vim.keymap.set("n", "<C-h>", function()
+vim.keymap.set("n", "<C-n>", function()
   require "harpoon".ui:toggle_quick_menu(require "harpoon":list(), {
     border = "rounded",
     ui_width_ratio = 0.4,
   })
 end)
 vim.keymap.set("n", "<leader>a", function() require "harpoon":list():add() end)
-vim.keymap.set("n", "<C-j>", function() require "harpoon":list():select(1) end)
-vim.keymap.set("n", "<C-k>", function() require "harpoon":list():select(2) end)
-vim.keymap.set("n", "<C-l>", function() require "harpoon":list():select(3) end)
-vim.keymap.set("n", "<C-;>", function() require "harpoon":list():select(4) end)
+vim.keymap.set("n", "<C-h>", function() require "harpoon":list():select(1) end)
+vim.keymap.set("n", "<C-j>", function() require "harpoon":list():select(2) end)
+vim.keymap.set("n", "<C-k>", function() require "harpoon":list():select(3) end)
+vim.keymap.set("n", "<C-l>", function() require "harpoon":list():select(4) end)
 vim.keymap.set("n", "<C-p>", function() require "harpoon":list():select(5) end)
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
