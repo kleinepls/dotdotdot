@@ -49,6 +49,7 @@ require "oil".setup {
     ["."] = "actions.toggle_hidden",
   },
   float = {
+    border = "rounded",
     padding = 5,
     max_width = 150,
     win_options = { winblend = 0 },
