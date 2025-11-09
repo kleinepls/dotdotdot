@@ -10,7 +10,7 @@ vim.opt.diffopt = {
   "linematch:200",
 }
 
-vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr><cmd>wincmd H<cr>")
+vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr><cmd>wincmd H<cr>5j")
 vim.keymap.set("n", "<leader>gd", function() vim.fn.feedkeys ":Gvdiffsplit dev" end)
 
 vim.keymap.set("n", "<leader>g;", function() vim.cmd.DiffviewOpen "origin/HEAD...HEAD" end)

@@ -29,6 +29,17 @@ vim.lsp.config("lua_ls", {
   },
 })
 
+vim.lsp.config("cssls", {
+  settings = {
+    css = {
+      validate = true,
+      lint = { unknownAtRules = "ignore" },
+    },
+  },
+})
+
+vim.lsp.document_color.enable(true, 0, { style = "virtual" })
+
 vim.diagnostic.config {
   signs = false,
   severity_sort = true,
@@ -92,11 +103,11 @@ return {
     opts = {
       formatters_by_ft = {
         go = { "goimports" },
-        javascript = { "eslint_d", "prettierd", "prettier" },
-        typescript = { "eslint_d", "prettierd", "prettier" },
-        javascriptreact = { "eslint_d", "prettierd", "prettier" },
-        typescriptreact = { "eslint_d", "prettierd", "prettier" },
-        vue = { "eslint_d", "prettierd", "prettier" },
+        javascript = { "eslint_d" },
+        typescript = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
+        vue = { "eslint_d" },
       },
       format_on_save = function()
         if vim.g.autoformat then

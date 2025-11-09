@@ -12,7 +12,10 @@ local mel = require "melange/palettes/dark"
 vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
 vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
 vim.api.nvim_set_hl(0, "MatchParen", { fg = mel.b.yellow, bg = mel.a.sel, bold = true })
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#efcc8a" })
 vim.api.nvim_set_hl(0, "LspReferenceText", { bg = mel.a.float })
+vim.api.nvim_set_hl(0, "SnippetTabstopActive", { bg = nil }) -- to not highlight autocompleted text
+vim.api.nvim_set_hl(0, "diffChanged", { fg = mel.b.yellow }) -- for DiffviewFiles
 vim.api.nvim_set_hl(0, "DiffDelete", { fg = mel.a.sel })
 vim.api.nvim_set_hl(0, "DiffChange", { bg = mel.a.bg })
 vim.api.nvim_set_hl(0, "DiffviewDiffAddAsDelete", { bg = "#70252A" })
@@ -94,12 +97,33 @@ vim.keymap.set("n", "]E", function()
 end)
 
 vim.o.statusline = " %f%m   (%l, %L %c)"
--- vim.o.statuscolumn = "%{v:lnum} %{v:relnum}"
+vim.o.statuscolumn = "%{printf('%4s %2s',v:lnum,v:relnum)}┆"
 
+vim.api.nvim_create_autocmd("BufEnter", { -- expands statuscolumn based on buf line count
+  callback = function(args)
+    if vim.bo.filetype == "fugitive" then
+      vim.opt_local.statuscolumn = "%{printf('%3d',v:relnum)}"
+      return
+    end
+    if vim.bo.filetype == "DiffviewFiles" then
+      vim.opt_local.statuscolumn = ""
+      return
+    end
+
+    local l = vim.api.nvim_buf_line_count(args.buf)
+    if l > 9999 then
+      vim.opt_local.statuscolumn = "%{printf('%6s %2s',v:lnum,v:relnum)}┆"
+    elseif l > 999 then
+      vim.opt_local.statuscolumn = "%{printf('%5s %2s',v:lnum,v:relnum)}┆"
+    end
+  end,
+})
+
+vim.o.cursorline = true
+vim.o.cursorlineopt = "number"
 vim.o.list = true
 vim.o.listchars = "tab:» →,leadmultispace:† · ‡ · ,trail:▫,precedes:←,extends:◊"
 vim.o.fillchars = "diff:╱"
-vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "auto"
 vim.o.wrap = false
