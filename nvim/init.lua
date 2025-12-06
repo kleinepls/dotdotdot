@@ -46,6 +46,7 @@ vim.keymap.set({ "n", "v" }, "<M-k>", "7k")
 -- tab navigation
 vim.keymap.set("n", "TN", vim.cmd.tabnext)
 vim.keymap.set("n", "TP", vim.cmd.tabprevious)
+vim.keymap.set("n", "TT", vim.cmd.tabnew)
 vim.keymap.set("n", "TX", vim.cmd.tabclose)
 
 -- paste maintaining unnamed register
@@ -97,24 +98,26 @@ vim.keymap.set("n", "]E", function()
 end)
 
 vim.o.statusline = " %f%m   (%l, %L %c)"
-vim.o.statuscolumn = "%{printf('%4s %2s',v:lnum,v:relnum)}┆"
 
 vim.api.nvim_create_autocmd("BufEnter", { -- expands statuscolumn based on buf line count
   callback = function(args)
-    if vim.bo.filetype == "fugitive" then
-      vim.opt_local.statuscolumn = "%{printf('%3d',v:relnum)}"
+    local ft, bt = vim.bo.filetype, vim.bo.buftype
+    if bt == "nofile" or ft == "DiffviewFiles" then
+      vim.o.statuscolumn = ""
       return
     end
-    if vim.bo.filetype == "DiffviewFiles" then
-      vim.opt_local.statuscolumn = ""
+    if ft == "help" then
+      vim.o.statuscolumn = "%{v:lnum} "
       return
     end
 
     local l = vim.api.nvim_buf_line_count(args.buf)
     if l > 9999 then
-      vim.opt_local.statuscolumn = "%{printf('%6s %2s',v:lnum,v:relnum)}┆"
+      vim.o.statuscolumn = "%{printf('%6s %2s',v:lnum,v:relnum)}┆"
     elseif l > 999 then
-      vim.opt_local.statuscolumn = "%{printf('%5s %2s',v:lnum,v:relnum)}┆"
+      vim.o.statuscolumn = "%{printf('%5s %2s',v:lnum,v:relnum)}┆"
+    else
+      vim.o.statuscolumn = "%{printf('%4s %2s',v:lnum,v:relnum)}┆"
     end
   end,
 })

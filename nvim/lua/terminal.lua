@@ -16,6 +16,10 @@ local function create_floating_window(opts)
   local buf = opts.buf
   if vim.api.nvim_buf_is_valid(buf) == false then
     buf = vim.api.nvim_create_buf(false, true)
+
+    vim.api.nvim_buf_call(buf, function()
+      vim.cmd.terminal()
+    end)
   end
 
   local win = vim.api.nvim_open_win(buf, true, {
@@ -38,9 +42,6 @@ local toggle_terminal = function()
     vim.api.nvim_win_hide(state.win)
   else
     state = create_floating_window { buf = state.buf }
-    if vim.bo[state.buf].buftype ~= "terminal" then
-      vim.cmd.terminal()
-    end
     vim.cmd.startinsert()
   end
 end
