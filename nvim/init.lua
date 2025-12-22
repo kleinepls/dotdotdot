@@ -23,19 +23,19 @@ vim.api.nvim_set_hl(0, "DiffviewDiffAddAsDelete", { bg = "#70252A" })
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
-vim.keymap.set({ "n", "v" }, "<space>", "<nop>")
+vim.keymap.set({ "n", "x" }, "<space>", "<nop>")
 -- word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("i", "<Up>", "<C-o>gk")
 vim.keymap.set("i", "<Down>", "<C-o>gj")
 -- move lines in visual mode
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv")
 -- keep cursor in place when joining
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("v", "<", "<gv", { noremap = true, silent = false })
-vim.keymap.set("v", ">", ">gv", { noremap = true, silent = false })
+vim.keymap.set("x", "<", "<gv", { noremap = true, silent = false })
+vim.keymap.set("x", ">", ">gv", { noremap = true, silent = false })
 
 -- do not populate the jumplist with { and } movements
 vim.keymap.set("n", "{", "<cmd>keepjumps normal! {<cr>")
@@ -49,15 +49,18 @@ vim.keymap.set("n", "TP", vim.cmd.tabprevious)
 vim.keymap.set("n", "TT", vim.cmd.tabnew)
 vim.keymap.set("n", "TX", vim.cmd.tabclose)
 
+vim.keymap.set("n", "<c-e>", "<c-e>j")
+vim.keymap.set("n", "<c-y>", "<c-y>k")
+
 -- paste maintaining unnamed register
 vim.keymap.set("x", "<leader>p", '"_dP')
 -- copy to system
-vim.keymap.set("v", "<enter>", '"+y')
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+vim.keymap.set("x", "<enter>", '"+y')
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y')
 -- copy file contents
 vim.keymap.set("n", "<leader>A", 'ggVG"+y<C-o>')
 -- delete to void register
-vim.keymap.set("v", "<leader>d", '"_d')
+vim.keymap.set("x", "<leader>d", '"_d')
 
 -- text replacing
 vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- entire file

@@ -67,7 +67,7 @@ return {
       attach_to_untracked = true,
       current_line_blame_opts = { delay = 300 },
       on_attach = function()
-        vim.keymap.set("v", "<leader>hr",
+        vim.keymap.set("x", "<leader>hr",
           function() require "gitsigns".reset_hunk { vim.fn.line ".", vim.fn.line "v" } end)
         vim.keymap.set("n", "<leader>hR", function() require "gitsigns".reset_buffer() end)
         vim.keymap.set("n", "<leader>hb", function() require "gitsigns".blame() end)

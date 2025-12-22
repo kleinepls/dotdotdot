@@ -19,8 +19,8 @@ return {
     set({ "n", "x" }, "<c-b>", function() match_add(-1) end)
     set({ "n", "x" }, "<leader><c-v>", mc.matchAllAddCursors)
 
-    set("v", "I", mc.insertVisual)
-    set("v", "A", mc.appendVisual)
+    set("x", "I", mc.insertVisual)
+    set("x", "A", mc.appendVisual)
 
     mc.addKeymapLayer(function(layerSet)
       layerSet("n", "<esc>", mc.clearCursors)
@@ -29,7 +29,7 @@ return {
 
       -- layerSet({ "n", "x" }, "<c-q>", mc.toggleCursor)
 
-      layerSet({ "n", "v" }, "H", mc.firstCursor)
+      layerSet({ "n", "x" }, "H", mc.firstCursor)
       layerSet({ "n", "x" }, "<left>", mc.prevCursor)
       layerSet({ "n", "x" }, "<right>", mc.nextCursor)
       layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)

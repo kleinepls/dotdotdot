@@ -3,78 +3,72 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
     lazy = false,
-    branch = "master",
     build = ":TSUpdate",
+    branch = "main",
     config = function()
-      require("nvim-treesitter.configs").setup {
-        ensure_installed = {
-          "css",
-          "go",
-          "html",
-          "javascript",
-          "lua",
-          "markdown_inline",
-          "rust",
-          "tsx",
-          "typescript",
-          "vim",
-          "vimdoc",
-          "vue",
-        },
-        auto_install = true,
-        sync_install = false,
-        ignore_install = {},
-        modules = {},
-        highlight = { enable = true, additional_vim_regex_highlighting = false },
-        indent = { enable = true },
-
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            node_decremental = "<C-Z>",
-          },
-        },
-
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-            },
-          },
-
-          swap = {
-            enable = true,
-            swap_next = {
-              ["]z"] = "@parameter.inner",
-            },
-            swap_previous = {
-              ["]x"] = "@parameter.inner",
-            },
-          },
-
-          move = {
-            enable = true,
-            -- set_jumps = true,
-            goto_next_start = {
-              ["]m"] = "@function.outer",
-            },
-            goto_next_end = {
-              ["]M"] = "@function.outer",
-            },
-            goto_previous_start = {
-              ["[m"] = "@function.outer",
-            },
-            goto_previous_end = {
-              ["[M"] = "@function.outer",
-            },
-          },
-        },
+      require "nvim-treesitter".install {
+        "css",
+        "go",
+        "html",
+        "javascript",
+        "lua",
+        "markdown_inline",
+        "rust",
+        "tsx", "typescript",
+        "vim", "vimdoc", "vue",
       }
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          if
+              vim.list_contains(
+                require "nvim-treesitter".get_installed(),
+                vim.treesitter.language.get_lang(args.match)
+              )
+          then
+            vim.treesitter.start(args.buf)
+          end
+        end,
+      })
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    opts = {
+      select = {
+        lookahead = true,
+        -- selection_modes = {},
+      },
+    },
+    config = function()
+      vim.keymap.set({ "x", "o" }, "af", function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+      end)
+      vim.keymap.set({ "x", "o" }, "if", function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+      end)
+
+      vim.keymap.set("n", "]z", function()
+        require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
+      end)
+      vim.keymap.set("n", "[z", function()
+        require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
+      end)
+
+      vim.keymap.set("n", "]m", function()
+        require("nvim-treesitter-textobjects.move").goto_next_start "@function.outer"
+      end)
+      vim.keymap.set("n", "]M", function()
+        require("nvim-treesitter-textobjects.move").goto_next_end "@function.outer"
+      end)
+      vim.keymap.set("n", "[m", function()
+        require("nvim-treesitter-textobjects.move").goto_previous_start "@function.outer"
+      end)
+      vim.keymap.set("n", "[M", function()
+        require("nvim-treesitter-textobjects.move").goto_previous_end "@function.outer"
+      end)
     end,
   },
 

@@ -55,7 +55,7 @@ return {
     vim.keymap.set("n", "<leader>ft", fzf.treesitter)
 
     vim.keymap.set("n", "<leader>fg", fzf.grep)
-    vim.keymap.set("v", "<leader>fv", fzf.grep_visual)
+    vim.keymap.set("x", "<leader>fv", fzf.grep_visual)
     vim.keymap.set("n", "<leader>fw", fzf.grep_cword)
     vim.keymap.set("n", "<leader>W", fzf.grep_cWORD)
     vim.keymap.set("n", "<leader>G", fzf.live_grep)

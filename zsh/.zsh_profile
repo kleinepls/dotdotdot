@@ -12,32 +12,20 @@ alias zshrr="source ~/.zshrc"
 alias sshcopy="pbcopy < ~/.ssh/id_rsa.pub"
 alias kill4000="lsof -ti:4000 | xargs kill"
 
+alias k="kubectl"
 
 alias v="nvim"
-alias vimc="cd ~/dotfiles/neovim && nvim ."
+alias vimc="cd ~/dotfiles/nvim && nvim ."
 alias obsi="cd $HOME/Documents/Obsidian\ Vault && nvim ."
 
-
 alias g="git"
-alias gcd="git checkout dev"
+alias gsd="git switch dev"
 alias gl="git pull"
 alias gp="git push"
 alias gc="git commit -m"
-alias gch="git checkout"
-alias gcb="git checkout -b"
-alias gmd="git checkout dev && git pull && git checkout - && git merge dev"
-alias gb="git branch"
+alias gs="git switch"
+alias gmd="git switch dev && git pull && git switch - && git merge dev"
 alias nah="git reset --hard && git clean -df"
-alias log="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gclear="gb | grep -v 'develop' | grep -v 'dev' | grep -v 'master' | grep -v 'release' | xargs git branch -d"
+alias glo="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gclear="gb | grep -v 'develop' | grep -v 'dev' | grep -v 'master' | grep -v 'main' | grep -v 'release' | xargs git branch -d"
 
-
-# Laravel
-alias pa="php artisan"
-alias par="php artisan route:list --columns=name,uri"
-alias mif="php artisan migrate:fresh"
-alias pami="php artisan make:migration"
-alias pamo="php artisan make:model"
-alias pamc="php artisan make:controller"
-alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
-alias puf="sail phpunit --filter"
