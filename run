@@ -7,7 +7,7 @@ echo "AddKeysToAgent yes" >> ~/.ssh/config
 git config --global --add url."git@github.com:".insteadOf "https://github.com/"
 
 sudo pacman -Syu
-sudo pacman -S --noconfirm --needed zsh tmux wezterm fzf ripgrep fd git-delta stow jq bat
+sudo pacman -S --noconfirm --needed zsh tmux wezterm fzf ripgrep fd git-delta stow jq bat xh
 chsh -s $(which zsh)
 
 sudo pacman -S --noconfirm otf-commit-mono-nerd
@@ -31,8 +31,8 @@ curl -sS https://starship.rs/install.sh | sh
 starship preset nerd-font-symbols -o ~/.config/starship.toml
 curl https://mise.run | sh
 curl https://sh.rustup.rs -sSf | sh
-mise use go
-mise use node
+mise use -g go
+mise use -g node
 
 sudo pacman -S --noconfirm docker docker-compose
 sudo systemctl enable docker.socket
@@ -40,7 +40,7 @@ sudo systemctl start docker.socket
 sudo usermod -aG docker $USER
 newgrp docker
 
-sudo pacman -S --needed --noconfirm base-devel cmake ninja curl
+sudo pacman -S --needed --noconfirm base-devel cmake ninja curl tree-sitter-cli
 git clone git@github.com:neovim/neovim.git ~/sources/neovim
 cd ~/sources/neovim
 sudo make CMAKE_BUILD_TYPE=RelWithDebInfo

@@ -9,7 +9,7 @@ return {
 	front_end = "WebGpu",
 
 	font = wezterm.font("CommitMono Nerd Font Mono"),
-	font_size = 16,
+	font_size = 15,
 	line_height = 1.3,
 
 	keys = {
