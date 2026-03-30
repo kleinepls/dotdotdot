@@ -20,27 +20,19 @@ return {
 
       vim.api.nvim_create_autocmd("FileType", {
         callback = function(args)
-          local installed = vim.list_contains(
-            require "nvim-treesitter".get_installed(),
-            vim.treesitter.language.get_lang(args.match)
-          )
-          local available = vim.list_contains(
-            require "nvim-treesitter".get_available(),
-            vim.treesitter.language.get_lang(args.match)
-          )
+          local lang = vim.treesitter.language.get_lang(args.match)
+          local installed = vim.list_contains(require "nvim-treesitter".get_installed(), lang)
+          local available = vim.list_contains(require "nvim-treesitter".get_available(), lang)
 
           if installed then
             vim.treesitter.start(args.buf)
           elseif available then
-            require "nvim-treesitter".install(args.match)
-            vim.defer_fn(
-              function()
-                if not pcall(vim.treesitter.start, args.buf) then
-                  vim.notify("failed starting language parser: " .. args.match, vim.log.levels.ERROR)
-                end
-              end,
-              3000
-            )
+            require "nvim-treesitter".install(lang)
+            vim.defer_fn(function()
+              if not pcall(vim.treesitter.start, args.buf) then
+                vim.notify("failed starting language parser: " .. args.match, vim.log.levels.ERROR)
+              end
+            end, 3000)
           end
         end,
       })
@@ -91,7 +83,8 @@ return {
     event = "VeryLazy",
     opts = { max_lines = 3 },
     init = function()
-      vim.keymap.set({ "n", "x" }, "]C", function() require("treesitter-context").go_to_context() end, { silent = true })
+      vim.keymap.set({ "n", "x" }, "]C", function() require("treesitter-context").go_to_context() end)
+      vim.keymap.set({ "n", "x" }, "]x", function() require("treesitter-context").go_to_context(3) end)
     end,
   },
 }

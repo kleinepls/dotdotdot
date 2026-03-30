@@ -38,7 +38,7 @@ vim.lsp.config("cssls", {
   },
 })
 
-vim.lsp.document_color.enable(true, 0, { style = "virtual" })
+vim.lsp.document_color.enable(true, { bufnr = 0 }, { style = "virtual" })
 
 vim.diagnostic.config {
   signs = false,

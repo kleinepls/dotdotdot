@@ -18,6 +18,8 @@ alias v="nvim"
 alias vimc="cd ~/dotfiles/nvim && nvim ."
 alias obsi="cd $HOME/Documents/Obsidian\ Vault && nvim ."
 
+alias pew="git log --format='%h - %an, %ar — %s'" # dev...master
+
 alias g="git"
 alias gsd="git switch dev"
 alias gl="git pull"
