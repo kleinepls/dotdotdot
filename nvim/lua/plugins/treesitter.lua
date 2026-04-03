@@ -60,7 +60,7 @@ return {
         require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
       end)
       vim.keymap.set("n", "[z", function()
-        require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
+        require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.inner"
       end)
 
       vim.keymap.set("n", "]m", function()

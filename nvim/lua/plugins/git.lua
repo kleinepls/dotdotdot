@@ -4,7 +4,7 @@ vim.opt.diffopt = {
   "context:999999",
   "filler",
   "indent-heuristic",
-  "inline:word",
+  "inline:char",
   "internal",
   -- "iwhite",
   "linematch:200",

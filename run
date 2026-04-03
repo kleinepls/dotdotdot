@@ -27,20 +27,26 @@ git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax
 git clone git@github.com:zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
 git clone git@github.com:Aloxaf/fzf-tab.git ~/.zsh/fzf-tab
 
-curl -sS https://starship.rs/install.sh | sh
-starship preset nerd-font-symbols -o ~/.config/starship.toml
-curl https://mise.run | sh
 curl https://sh.rustup.rs -sSf | sh
+curl https://mise.run | sh
 mise use -g go
 mise use -g node
+curl -sS https://starship.rs/install.sh | sh
+starship preset nerd-font-symbols -o ~/.config/starship.toml
 
 sudo pacman -S --noconfirm docker docker-compose
-sudo systemctl enable docker.socket
-sudo systemctl start docker.socket
+sudo systemctl enable --now docker.socket
 sudo usermod -aG docker $USER
 newgrp docker
 
 sudo pacman -S --needed --noconfirm base-devel cmake ninja curl tree-sitter-cli
+
+git clone https://aur.archlinux.org/paru.git ~/sources/paru
+cd ~/sources/paru
+makepkg -si
+paru -S informant
+sudo usermod -aG informant $USER
+
 git clone git@github.com:neovim/neovim.git ~/sources/neovim
 cd ~/sources/neovim
 sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
