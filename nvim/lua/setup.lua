@@ -12,6 +12,9 @@ vim.pack.add {
   { src = "https://github.com/theprimeagen/harpoon", version = "harpoon2" },
 }
 
+vim.cmd.packadd "nvim.undotree"
+vim.keymap.set("n", "<leader>u", require("undotree").open)
+
 require "oil".setup {
   columns = { "icon" },
   skip_confirm_for_simple_edits = true,
@@ -69,7 +72,6 @@ vim.keymap.set("n", "<C-k>", function() require "harpoon":list():select(3) end)
 vim.keymap.set("n", "<C-l>", function() require "harpoon":list():select(4) end)
 vim.keymap.set("n", "<C-p>", function() require "harpoon":list():select(5) end)
 
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "-", vim.cmd.Oil)
 vim.keymap.set("n", "<leader>of", function() require "oil".toggle_float() end)
 vim.keymap.set("n", "<leader>o~", function() require "oil".toggle_float "~" end)
