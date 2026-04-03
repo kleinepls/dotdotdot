@@ -1,38 +1,15 @@
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system { "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup {
-  checker = { enabled = false },
-  change_detection = { notify = false },
-  rocks = { enabled = false },
-  spec = {
-    "tpope/vim-sleuth",
-    "mbbill/undotree",
-    "savq/melange-nvim",
-    -- { "brenoprata10/nvim-highlight-colors", opts = { render = "virtual", virtual_symbol_suffix = "" } },
-    { "saghen/blink.cmp", dependencies = "rafamadriz/friendly-snippets", version = "*" },
-    { "nvim-mini/mini.icons", version = false, opts = {} },
-    { "nvim-mini/mini.surround", version = false, opts = {} },
-    { "stevearc/quicker.nvim", event = "FileType qf", opts = {} },
-    "stevearc/oil.nvim",
-    "mrjones2014/smart-splits.nvim",
-    { "theprimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
-
-    { import = "plugins" },
-  },
+vim.pack.add {
+  "https://github.com/tpope/vim-sleuth", -- todo: not sure if i need this
+  "https://github.com/savq/melange-nvim",
+  "https://github.com/rafamadriz/friendly-snippets",
+  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range "1.*" },
+  { src = "https://github.com/nvim-mini/mini.icons", version = "stable" },
+  { src = "https://github.com/nvim-mini/mini.surround", version = "stable" },
+  { src = "https://github.com/stevearc/quicker.nvim", data = { load = false } },
+  "https://github.com/stevearc/oil.nvim",
+  "https://github.com/mrjones2014/smart-splits.nvim",
+  "https://github.com/nvim-lua/plenary.nvim",
+  { src = "https://github.com/theprimeagen/harpoon", version = "harpoon2" },
 }
 
 require "oil".setup {
@@ -84,6 +61,7 @@ vim.keymap.set("n", "<C-n>", function()
     ui_width_ratio = 0.4,
   })
 end)
+
 vim.keymap.set("n", "<leader>a", function() require "harpoon":list():add() end)
 vim.keymap.set("n", "<C-h>", function() require "harpoon":list():select(1) end)
 vim.keymap.set("n", "<C-j>", function() require "harpoon":list():select(2) end)
