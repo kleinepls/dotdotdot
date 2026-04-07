@@ -121,6 +121,18 @@ require "conform".setup {
   end,
 }
 
+vim.g.autoformat = true
+vim.keymap.set("n", "<leader>tf", vim.cmd.ToggleFormat)
+
+vim.api.nvim_create_user_command("ToggleFormat", function()
+  if vim.g.autoformat then
+    vim.notify "auto formatting=off"
+  else
+    vim.notify "auto formatting=on"
+  end
+  vim.g.autoformat = not vim.g.autoformat
+end, {})
+
 require("lint").linters_by_ft = {
   javascript = { "eslint_d" },
   javascriptreact = { "eslint_d" },
