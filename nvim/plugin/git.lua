@@ -29,6 +29,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "diffview://*" },
+  callback = function()
+    local mel = require "melange/palettes/dark"
+    vim.api.nvim_set_hl(0, "diffChanged", { fg = mel.b.yellow }) -- for DiffviewFiles
+    vim.api.nvim_set_hl(0, "DiffDelete", { fg = mel.a.sel })
+    vim.api.nvim_set_hl(0, "DiffChange", { bg = mel.a.bg })
+    vim.api.nvim_set_hl(0, "DiffviewDiffAddAsDelete", { bg = "#70252A" })
+  end,
+})
+
 vim.pack.add {
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/tpope/vim-rhubarb",
