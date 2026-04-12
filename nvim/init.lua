@@ -75,7 +75,7 @@ vim.keymap.set("i", "<c-n>", function()
 end)
 vim.keymap.set("i", "<c-j>", function() -- appends `json:""`
   vim.cmd.stopinsert()
-  vim.fn.feedkeys "_yiwvUA `json:\"pbvuA\"`"
+  vim.fn.feedkeys "%_yiwvU$%A `json:\"pbvuA\"`"
 end)
 
 vim.keymap.set("i", "<c-p>", function()
