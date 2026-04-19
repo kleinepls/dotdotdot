@@ -82,7 +82,7 @@ vim.keymap.set("n", "[M", function()
 end)
 
 require "treesitter-context".setup {
-   max_lines = 3,
+  max_lines = 3,
 }
 vim.keymap.set({ "n", "x" }, "]C", function() require("treesitter-context").go_to_context() end)
 vim.keymap.set({ "n", "x" }, "]x", function() require("treesitter-context").go_to_context(3) end)

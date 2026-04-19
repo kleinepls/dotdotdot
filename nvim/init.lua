@@ -6,6 +6,7 @@ require "setup"
 require "commands"
 require "terminal"
 require "marks"
+require "menu"
 
 vim.cmd.colorscheme "melange"
 local mel = require "melange/palettes/dark"

@@ -22,7 +22,7 @@ vim.lsp.config("lua_ls", {
       workspace = {
         library = {
           vim.env.VIMRUNTIME,
-          vim.fn.stdpath("data") .. "/lazy/melange-nvim",
+          vim.fn.stdpath "data" .. "/site/pack/core/opt/melange-nvim",
         },
       },
     },
