@@ -84,5 +84,22 @@ end)
 require "treesitter-context".setup {
   max_lines = 3,
 }
-vim.keymap.set({ "n", "x" }, "]C", function() require("treesitter-context").go_to_context() end)
-vim.keymap.set({ "n", "x" }, "]x", function() require("treesitter-context").go_to_context(3) end)
+
+-- moves to method name in go files
+local handle_go_ctx = function()
+  if vim.bo.ft == "go" then
+    if vim.fn.expand "<cword>" == "func" then
+      vim.fn.feedkeys "f)W"
+    end
+  end
+end
+
+vim.keymap.set({ "n", "x" }, "]C", function()
+  require("treesitter-context").go_to_context()
+  handle_go_ctx()
+end)
+
+vim.keymap.set({ "n", "x" }, "]x", function()
+  require("treesitter-context").go_to_context(3)
+  handle_go_ctx()
+end)
