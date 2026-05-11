@@ -10,8 +10,9 @@ require "menu"
 
 vim.cmd.colorscheme "melange"
 local mel = require "melange/palettes/dark"
-vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1e1b1a" })
+vim.api.nvim_set_hl(0, "Normal", { fg = mel.a.fg, bg = "#1A1110" })
 vim.api.nvim_set_hl(0, "Whitespace", { fg = "#4e433e", italic = false, nocombine = true })
+vim.api.nvim_set_hl(0, "Search", { bg = "#443c25" })
 vim.api.nvim_set_hl(0, "MatchParen", { fg = mel.b.yellow, bg = mel.a.sel, bold = true })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#efcc8a" })
 vim.api.nvim_set_hl(0, "LspReferenceText", { bg = mel.a.float })
