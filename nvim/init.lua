@@ -65,35 +65,9 @@ vim.keymap.set("n", "<leader>rf", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left
 vim.keymap.set("n", "<leader>rl", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- current line
 vim.keymap.set("n", "<leader>rp", ":%s/<C-r><C-w>/<C-r>0/g<CR>") -- entire file with "0 register
 
--- go keymaps
-vim.keymap.set("n", "<leader>ej", '_yiwvUA `json:"<Esc>pbvuA"`<Esc>V=')
-vim.keymap.set("i", "<c-e>", function()
-  if vim.bo.ft == "go" then
-    vim.fn.feedkeys("if err != nil {o}Oreturn err")
-  end
-end)
-vim.keymap.set("i", "<c-j>", function() -- appends `json:"myProp"`
-  if vim.bo.ft ~= "go" then return end
-  vim.cmd.stopinsert()
-  vim.defer_fn(function()
-    if vim.fn.expand "<cword>" == "}" then
-      vim.fn.feedkeys "%_yiwvU$%A `json:\"pbvuA\"`"
-    else
-      vim.fn.feedkeys "_yiwvUA `json:\"pbvuA\"`"
-    end
-  end, 0)
-end)
-
-vim.keymap.set("i", "<c-n>", function()
-  if vim.bo.ft == "go" then
-    vim.fn.feedkeys "fmt.Printf(\"%+v\\n\", )i"
-  end
-end)
 vim.keymap.set("i", "<c-p>", function()
   local ft = vim.bo.ft
-  if ft == "go" then
-    vim.fn.feedkeys "fmt.Println()i"
-  elseif ft == "typescript" or ft == "typescriptreact" or ft == "vue" or ft == "javascript" then
+  if ft == "typescript" or ft == "typescriptreact" or ft == "vue" or ft == "javascript" then
     vim.fn.feedkeys "console.log()i"
   end
 end)
