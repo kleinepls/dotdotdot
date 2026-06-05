@@ -59,6 +59,9 @@ vim.keymap.set("x", "<leader>fv", fzf.grep_visual)
 vim.keymap.set("n", "<leader>fw", fzf.grep_cword)
 vim.keymap.set("n", "<leader>W", fzf.grep_cWORD)
 vim.keymap.set("n", "<leader>G", fzf.live_grep)
+vim.keymap.set("x", "<leader>G", function()
+  fzf.live_grep { search = fzf.utils.get_visual_selection() }
+end)
 
 vim.keymap.set("n", "<leader>ff", fzf.git_files)
 vim.keymap.set("n", "<leader>gt", fzf.git_status)
@@ -94,10 +97,8 @@ vim.keymap.set("n", "<leader>fa", fzf.tagstack)
 vim.keymap.set("n", "<leader>fk", full_window(fzf.keymaps))
 
 vim.keymap.set("n", "<leader>/", fzf.lgrep_curbuf)
-vim.keymap.set("n", "<leader>f/", function()
-  local word = vim.fn.expand "<cword>"
-  fzf.lgrep_curbuf()
-  vim.fn.feedkeys(word)
+vim.keymap.set("x", "<leader>/", function()
+  fzf.lgrep_curbuf { search = fzf.utils.get_visual_selection() }
 end)
 
 vim.keymap.set("n", "<leader>af", function() fzf.files { cwd = vim.fn.expand "%:h" } end)
