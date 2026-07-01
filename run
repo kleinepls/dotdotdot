@@ -10,8 +10,6 @@ sudo pacman -Syu
 sudo pacman -S --noconfirm --needed zsh tmux wezterm fzf ripgrep fd git-delta stow jq bat man less xh
 chsh -s $(which zsh)
 
-sudo pacman -S --noconfirm otf-commit-mono-nerd
-
 mv ~/.zshrc ~/.zshrc.old
 mkdir ~/code ~/.scripts
 ln -s ~/dotfiles/nvim ~/.config/nvim
@@ -46,6 +44,8 @@ cd ~/sources/paru
 makepkg -si
 paru -S informant
 sudo usermod -aG informant $USER
+
+paru -S ttf-juliamono-nerd-font
 
 git clone git@github.com:neovim/neovim.git ~/sources/neovim
 cd ~/sources/neovim

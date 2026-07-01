@@ -7,10 +7,12 @@ return {
 	enable_tab_bar = false,
 	debug_key_events = true,
 	front_end = "WebGpu",
+	warn_about_missing_glyphs = false,
 
-	font = wezterm.font("CommitMono Nerd Font Mono"),
-	font_size = 15,
-	line_height = 1.3,
+	font = wezterm.font("JuliaMono Nerd Font Mono"),
+	font_size = 16,
+
+	harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- turn off the disgusting ligatures
 
 	keys = {
 		{ key = "Backspace", mods = "CTRL", action = wezterm.action.SendKey({ key = "w", mods = "CTRL" }) },
