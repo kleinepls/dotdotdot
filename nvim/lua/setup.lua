@@ -65,6 +65,7 @@ vim.keymap.set("n", "<C-n>", function()
   })
 end)
 
+-- todo :h nvim_replace_termcodes()
 vim.keymap.set("n", "<leader>a", function() require "harpoon":list():add() end)
 vim.keymap.set("n", "<C-h>", function() require "harpoon":list():select(1) end)
 vim.keymap.set("n", "<C-j>", function() require "harpoon":list():select(2) end)

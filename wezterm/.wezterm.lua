@@ -11,6 +11,7 @@ return {
 
 	font = wezterm.font("JuliaMono Nerd Font Mono"),
 	font_size = 16,
+	line_height = 1.1,
 
 	harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- turn off the disgusting ligatures
 
