@@ -1,3 +1,28 @@
+-- registers apache avro language parser
+local function register_avro()
+  vim.filetype.add({
+    extension = {
+      avdl = "avro",
+      avsc = "json",
+      avpr = "json",
+    },
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "TSUpdate",
+    callback = function()
+      require("nvim-treesitter.parsers").apache_avro = {
+        install_info = {
+          url = "https://github.com/victorhqc/tree-sitter-apache-avro",
+          queries = "queries",
+        },
+      }
+    end,
+  })
+
+  vim.treesitter.language.register("apache_avro", { "avro" })
+end
+
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(e)
     local name, kind = e.data.spec.name, e.data.kind
@@ -27,6 +52,8 @@ require "nvim-treesitter".install {
   "tsx", "typescript",
   "vim", "vimdoc", "vue",
 }
+
+register_avro()
 
 vim.api.nvim_create_autocmd("FileType", {
   callback = function(args)
