@@ -8,6 +8,7 @@ return {
 	debug_key_events = true,
 	front_end = "WebGpu",
 	warn_about_missing_glyphs = false,
+	window_decorations = "RESIZE",
 
 	font = wezterm.font("JuliaMono Nerd Font Mono"),
 	font_size = 16,
