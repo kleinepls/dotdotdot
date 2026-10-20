@@ -76,11 +76,13 @@ vim.keymap.set("n", "-", vim.cmd.Oil)
 vim.keymap.set("n", "<leader>of", function() require "oil".toggle_float() end)
 vim.keymap.set("n", "<leader>o~", function() require "oil".toggle_float "~" end)
 
+require "quicker".setup {}
+
 vim.keymap.set("n", "<leader>q", function()
-  require("quicker").toggle { focus = true, height = 8 }
+  require("quicker").toggle { focus = true, max_height = 10 }
 end)
 vim.keymap.set("n", "<leader>l", function()
-  require("quicker").toggle { focus = true, height = 8, loclist = true }
+  require("quicker").toggle { focus = true, max_height = 10, loclist = true }
 end)
 vim.keymap.set("n", ">", function()
   require("quicker").toggle_expand { before = 3, after = 3, add_to_existing = true }
@@ -90,6 +92,8 @@ vim.keymap.set("n", "<A-H>", function() require "smart-splits".resize_left() end
 vim.keymap.set("n", "<A-J>", function() require "smart-splits".resize_down() end)
 vim.keymap.set("n", "<A-K>", function() require "smart-splits".resize_up() end)
 vim.keymap.set("n", "<A-L>", function() require "smart-splits".resize_right() end)
+vim.keymap.set("n", "<leader><A-H>", function() require "smart-splits".resize_left(20) end)
+vim.keymap.set("n", "<leader><A-L>", function() require "smart-splits".resize_right(20) end)
 vim.keymap.set("n", "<A-h>", function() require "smart-splits".move_cursor_left() end)
 vim.keymap.set("n", "<A-j>", function() require "smart-splits".move_cursor_down() end)
 vim.keymap.set("n", "<A-k>", function() require "smart-splits".move_cursor_up() end)
